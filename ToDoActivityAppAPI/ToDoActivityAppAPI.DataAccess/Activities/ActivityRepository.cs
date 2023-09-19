@@ -75,7 +75,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         {
             var activities = await _context.Activities.OrderByDescending(a => a.CreateTime).ToListAsync();
 
-            if(activities.Count > 0)
+            if (activities.Count > 0)
             {
                 return activities;
             }
@@ -103,9 +103,9 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         {
             var userActivity = await _context.Activities.FindAsync(id);
 
-            if(userActivity != null)
+            if (userActivity != null)
             {
-                if(userActivity.ApplicationUserId == IdentityUserId)
+                if (userActivity.ApplicationUserId == IdentityUserId)
                 {
                     return userActivity;
                 }
@@ -125,9 +125,9 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         {
             var activityUpdate = await _context.Activities.FindAsync(activity.ActivityId);
 
-            if(activityUpdate != null)
+            if (activityUpdate != null)
             {
-                if(activityUpdate.ApplicationUserId == IdentityUserId)
+                if (activityUpdate.ApplicationUserId == IdentityUserId)
                 {
                     activityUpdate.Title = activity.Title;
                     activityUpdate.Text = activity.Text;
@@ -138,7 +138,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
                     activityUpdate.Budget = activity.Budget;
                     activityUpdate.Location = activity.Location;
                     activityUpdate.Timed = activity.Timed;
-                       
+
                     _context.Activities.Update(activityUpdate);
                     await _context.SaveChangesAsync();
 
@@ -147,6 +147,49 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
                 {
                     throw new Exception("User can not update this activity");
                 }
+            }
+            else
+            {
+                throw new Exception("Not Found Activity");
+            }
+        }
+
+
+        public async Task<List<Activity>> GetUserActiviesDone(string IdentityUserId)
+        {
+            var userDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityDone == true).ToListAsync();
+
+            if (userDoneActivities.Count > 0)
+            {
+                return userDoneActivities;
+            }
+            else
+            {
+                throw new Exception("Not Found Activity");
+            }
+        }
+
+        public async Task<List<Activity>> GetUserActiviesNotDone(string IdentityUserId)
+        {
+            var userNotDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityDone == false).ToListAsync();
+
+            if (userNotDoneActivities.Count > 0)
+            {
+                return userNotDoneActivities;
+            }
+            else
+            {
+                throw new Exception("Not Found Activity");
+            }
+        }
+
+        public async Task<List<Activity>> GetUserActiviesByNumberOfDays(string IdentityUserId, int MinDay, int MaxDay)
+        {
+            var activies = await _context.Activities.Where(a => a.DayNumbers > MinDay && a.DayNumbers < MaxDay).ToListAsync();
+
+            if (activies.Count > 0)
+            {
+                return activies;
             }
             else
             {

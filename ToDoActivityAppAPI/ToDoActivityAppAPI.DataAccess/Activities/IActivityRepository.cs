@@ -16,5 +16,8 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         Task DeleteActivity(string IdentityUserId, int id);
         Task<List<Activity>> GetAllUserActivities(string IdentityUserId);
         Task<Activity> ActivityDone(int id);
+        Task<List<Activity>> GetUserActiviesDone(string IdentityUserId);
+        Task<List<Activity>> GetUserActiviesNotDone(string IdentityUserId);
+        Task<List<Activity>> GetUserActiviesByNumberOfDays(string IdentityUserId, int MinDay, int MaxDay);
     }
 }
