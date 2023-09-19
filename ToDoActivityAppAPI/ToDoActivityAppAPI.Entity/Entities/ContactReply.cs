@@ -11,13 +11,11 @@ namespace ToDoActivityAppAPI.Entity.Entities
     {
         [Key]
         public int ContactReplyId { get; set; }
-
+        public string ContactReplyTitle { get; set; }
         public string ContactReplyText { get; set; }
-
         public DateTime ContactReplyDate { get; set; }
 
         public Contact Contact { get; set; }
-
         public int ContactId { get; set; }
     }
 }

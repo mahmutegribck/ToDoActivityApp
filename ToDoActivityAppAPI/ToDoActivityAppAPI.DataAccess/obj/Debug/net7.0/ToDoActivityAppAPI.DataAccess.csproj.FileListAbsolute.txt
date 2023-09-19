@@ -9,3 +9,9 @@ C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.Da
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.DataAccess\obj\Debug\net7.0\refint\ToDoActivityAppAPI.DataAccess.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.DataAccess\obj\Debug\net7.0\ToDoActivityAppAPI.DataAccess.pdb
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.DataAccess\obj\Debug\net7.0\ref\ToDoActivityAppAPI.DataAccess.dll
+C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.DataAccess\bin\Debug\net7.0\ToDoActivityAppAPI.DataAccess.runtimeconfig.json
+C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.DataAccess\bin\Debug\net7.0\ToDoActivityAppAPI.Entity.dll
+C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.DataAccess\bin\Debug\net7.0\ToDoActivityAppAPI.Entity.pdb
+C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.DataAccess\obj\Debug\net7.0\ToDoActivityAppAPI.DataAccess.csproj.AssemblyReference.cache
+C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.DataAccess\obj\Debug\net7.0\ToDoActivityAppAPI.DataAccess.csproj.CopyComplete
+C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.DataAccess\obj\Debug\net7.0\ToDoActivityAppAPI.DataAccess.genruntimeconfig.cache
