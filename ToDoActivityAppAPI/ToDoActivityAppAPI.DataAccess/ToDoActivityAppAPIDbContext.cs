@@ -20,7 +20,7 @@ namespace ToDoActivityAppAPI.DataAccess
 
         public DbSet<Contact> Contacts { get; set; }
 
-        public DbSet<ContactReply> ContactsReplies { get; set; }
+        public DbSet<ContactReply> ContactReplies { get; set; }
         
         
     }

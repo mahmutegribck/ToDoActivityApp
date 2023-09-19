@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoActivityAppAPI.Entity",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoActivityAppAPI.DataAccess", "ToDoActivityAppAPI.DataAccess\ToDoActivityAppAPI.DataAccess.csproj", "{B431CC52-FEE1-46D5-AD34-56112A6BB925}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoActivityAppAPI.API", "ToDoActivityAppAPI.API\ToDoActivityAppAPI.API.csproj", "{BCF47D17-D8F4-4943-8F3D-1C664B612D13}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{B431CC52-FEE1-46D5-AD34-56112A6BB925}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B431CC52-FEE1-46D5-AD34-56112A6BB925}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B431CC52-FEE1-46D5-AD34-56112A6BB925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCF47D17-D8F4-4943-8F3D-1C664B612D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF47D17-D8F4-4943-8F3D-1C664B612D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF47D17-D8F4-4943-8F3D-1C664B612D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF47D17-D8F4-4943-8F3D-1C664B612D13}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
