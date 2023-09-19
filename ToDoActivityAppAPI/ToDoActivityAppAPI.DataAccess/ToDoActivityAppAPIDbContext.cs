@@ -7,10 +7,11 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using ToDoActivityAppAPI.Entity.Entities;
+using ToDoActivityAppAPI.Entity.Identity;
 
 namespace ToDoActivityAppAPI.DataAccess
 {
-    public class ToDoActivityAppAPIDbContext : DbContext
+    public class ToDoActivityAppAPIDbContext : IdentityDbContext<ApplicationUser, ApplicationRole, string>
     {
         public ToDoActivityAppAPIDbContext(DbContextOptions<ToDoActivityAppAPIDbContext> options) : base(options)
         {

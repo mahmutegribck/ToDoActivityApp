@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoActivityAppAPI.Entity.Identity;
 
 namespace ToDoActivityAppAPI.Entity.Entities
 {
@@ -24,5 +25,10 @@ namespace ToDoActivityAppAPI.Entity.Entities
         public bool ContactCheck { get; set; }
 
         public ContactReply ContactReply { get; set; }
+
+
+        public ApplicationUser ApplicationUser { get; set; }
+
+        public string ApplicationUserId { get; set; }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.Entity\\ToDoActivityAppAPI.Entity.csproj": {}
+    "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.Business\\ToDoActivityAppAPI.Business.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.Entity\\ToDoActivityAppAPI.Entity.csproj": {
+    "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.Business\\ToDoActivityAppAPI.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.Entity\\ToDoActivityAppAPI.Entity.csproj",
-        "projectName": "ToDoActivityAppAPI.Entity",
-        "projectPath": "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.Entity\\ToDoActivityAppAPI.Entity.csproj",
+        "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.Business\\ToDoActivityAppAPI.Business.csproj",
+        "projectName": "ToDoActivityAppAPI.Business",
+        "projectPath": "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.Business\\ToDoActivityAppAPI.Business.csproj",
         "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.Entity\\obj\\",
+        "outputPath": "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -43,12 +43,6 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "dependencies": {
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.10, )"
-            }
-          },
           "imports": [
             "net461",
             "net462",
