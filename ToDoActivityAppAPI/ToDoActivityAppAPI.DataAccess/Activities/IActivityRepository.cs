@@ -19,5 +19,6 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         Task<List<Activity>> GetUserActiviesDone(string IdentityUserId);
         Task<List<Activity>> GetUserActiviesNotDone(string IdentityUserId);
         Task<List<Activity>> GetUserActiviesByNumberOfDays(string IdentityUserId, int MinDay, int MaxDay);
+        Task<List<Activity>> GetUserActiviesByButget(string IdentityUserId, double MinButget, double MaxButget);
     }
 }

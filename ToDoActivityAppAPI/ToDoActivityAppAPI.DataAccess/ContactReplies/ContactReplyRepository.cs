@@ -82,13 +82,13 @@ namespace ToDoActivityAppAPI.DataAccess.ContactReplies
 
             if(contactReplyUpdate != null)
             {
-                contactReplyUpdate.ContactReplyTitle = contactReply.ContactReplyTitle;
-                contactReplyUpdate.ContactReplyText = contactReply.ContactReplyText;
-                contactReplyUpdate.ContactReplyDate = contactReply.ContactReplyDate;
+                contactReplyUpdate.Title = contactReply.Title;
+                contactReplyUpdate.Text = contactReply.Text;
+                contactReplyUpdate.Date = contactReply.Date;
                 
                 _context.ContactReplies.Update(contactReplyUpdate);
                 await _context.SaveChangesAsync();
-            }
+            }                                           
             else
             {
                 throw new Exception("Not Found Contact Reply");

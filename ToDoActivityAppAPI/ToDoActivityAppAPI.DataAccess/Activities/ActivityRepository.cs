@@ -23,7 +23,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
 
             if (activityDone != null)
             {
-                activityDone.ActivityDone = true;
+                activityDone.Done = true;
                 _context.Activities.Update(activityDone);
                 await _context.SaveChangesAsync();
                 return activityDone;
@@ -157,7 +157,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
 
         public async Task<List<Activity>> GetUserActiviesDone(string IdentityUserId)
         {
-            var userDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityDone == true).ToListAsync();
+            var userDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Done == true).ToListAsync();
 
             if (userDoneActivities.Count > 0)
             {
@@ -171,7 +171,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
 
         public async Task<List<Activity>> GetUserActiviesNotDone(string IdentityUserId)
         {
-            var userNotDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityDone == false).ToListAsync();
+            var userNotDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Done == false).ToListAsync();
 
             if (userNotDoneActivities.Count > 0)
             {
@@ -185,9 +185,23 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
 
         public async Task<List<Activity>> GetUserActiviesByNumberOfDays(string IdentityUserId, int MinDay, int MaxDay)
         {
-            var activies = await _context.Activities.Where(a => a.DayNumbers > MinDay && a.DayNumbers < MaxDay).ToListAsync();
+            var activies = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.DayNumbers > MinDay && a.DayNumbers < MaxDay).ToListAsync();
 
             if (activies.Count > 0)
+            {
+                return activies;
+            }
+            else
+            {
+                throw new Exception("Not Found Activity");
+            }
+        }
+
+        public async Task<List<Activity>> GetUserActiviesByButget(string IdentityUserId, double MinButget, double MaxButget)
+        {
+            var activies = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Budget > MinButget && a.Budget < MaxButget).ToListAsync();
+
+            if(activies.Count > 0)
             {
                 return activies;
             }

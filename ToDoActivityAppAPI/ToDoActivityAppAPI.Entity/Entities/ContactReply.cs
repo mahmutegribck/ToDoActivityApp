@@ -11,9 +11,9 @@ namespace ToDoActivityAppAPI.Entity.Entities
     {
         [Key]
         public int ContactReplyId { get; set; }
-        public string ContactReplyTitle { get; set; }
-        public string ContactReplyText { get; set; }
-        public DateTime ContactReplyDate { get; set; }
+        public string Title { get; set; }
+        public string Text { get; set; }
+        public DateTime Date { get; set; }
 
         public Contact Contact { get; set; }
         public int ContactId { get; set; }

@@ -20,7 +20,7 @@ namespace ToDoActivityAppAPI.DataAccess.Contacts
         {
             if(contact != null)
             {
-                contact.ContactDate = DateTime.Now;
+                contact.Date = DateTime.Now;
                 await _context.Contacts.AddAsync(contact);
                 await _context.SaveChangesAsync();
             }
@@ -54,7 +54,7 @@ namespace ToDoActivityAppAPI.DataAccess.Contacts
 
         public async Task<List<Contact>> GetAllContacts()
         {
-            var contactList = await _context.Contacts.OrderByDescending(c => c.ContactDate).ToListAsync();
+            var contactList = await _context.Contacts.OrderByDescending(c => c.Date).ToListAsync();
             if(contactList.Count > 0)
             {
                 return contactList;
@@ -67,7 +67,7 @@ namespace ToDoActivityAppAPI.DataAccess.Contacts
 
         public async Task<List<Contact>> GetAllUserContacts(string IdentityUserId)
         {
-            var userContacts = await _context.Contacts.Where(c => c.ApplicationUserId == IdentityUserId).OrderByDescending(c => c.ContactDate).ToListAsync();
+            var userContacts = await _context.Contacts.Where(c => c.ApplicationUserId == IdentityUserId).OrderByDescending(c => c.Date).ToListAsync();
 
             if(userContacts.Count > 0)
             {
@@ -122,9 +122,9 @@ namespace ToDoActivityAppAPI.DataAccess.Contacts
             {
                 if(contactUpdate.ApplicationUserId == IdentityUserId)
                 {
-                    contactUpdate.ContactTitle = contact.ContactTitle;
-                    contactUpdate.ContactText = contact.ContactText;
-                    contactUpdate.ContactDate = contact.ContactDate;
+                    contactUpdate.Title = contact.Title;
+                    contactUpdate.Text = contact.Text;
+                    contactUpdate.Date = contact.Date;
 
                     _context.Contacts.Update(contactUpdate);
                     await _context.SaveChangesAsync();

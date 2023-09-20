@@ -27,7 +27,7 @@ namespace ToDoActivityAppAPI.Entity.Entities
         public bool Timed { get; set; }
 
         [DefaultValue(false)]
-        public bool ActivityDone { get; set; }
+        public bool Done { get; set; }
 
 
         public ApplicationUser ApplicationUser { get; set; }

@@ -15,13 +15,13 @@ namespace ToDoActivityAppAPI.Entity.Entities
         public int ContactId { get; set; }
 
         [EmailAddress]
-        public string ContactEmailAddress { get; set; }
-        public string ContactTitle { get; set; }
-        public string ContactText { get; set; }
-        public DateTime ContactDate { get; set; }
+        public string EmailAddress { get; set; }
+        public string Title { get; set; }
+        public string Text { get; set; }
+        public DateTime Date { get; set; }
 
         [DefaultValue(false)]
-        public bool ContactCheck { get; set; }
+        public bool Check { get; set; }
 
         public ContactReply ContactReply { get; set; }
 
