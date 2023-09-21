@@ -18,7 +18,7 @@ namespace ToDoActivityAppAPI.Entity.Entities
         public DateTime CreateTime { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public int DayNumbers { get; set; }
+        public int DayNumbers { get; set; } 
         public double Budget { get; set; }
         public string Location { get; set; }
 

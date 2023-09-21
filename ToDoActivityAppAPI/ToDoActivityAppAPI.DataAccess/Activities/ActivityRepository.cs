@@ -39,6 +39,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
             if (activity != null)
             {
                 activity.CreateTime = DateTime.Now;
+                activity.DayNumbers = (activity.EndTime - activity.StartTime).Days;
                 await _context.Activities.AddAsync(activity);
                 await _context.SaveChangesAsync();
             }
@@ -134,7 +135,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
                     activityUpdate.CreateTime = activity.CreateTime;
                     activityUpdate.StartTime = activity.StartTime;
                     activityUpdate.EndTime = activity.EndTime;
-                    activityUpdate.DayNumbers = activity.DayNumbers;
+                    activityUpdate.DayNumbers = (activity.EndTime - activity.StartTime).Days;
                     activityUpdate.Budget = activity.Budget;
                     activityUpdate.Location = activity.Location;
                     activityUpdate.Timed = activity.Timed;

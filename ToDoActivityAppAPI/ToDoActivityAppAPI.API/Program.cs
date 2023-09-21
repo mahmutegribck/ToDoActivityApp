@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoActivityAppAPI.DataAccess;
+using ToDoActivityAppAPI.DataAccess.Activities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//builder.Services.AddScoped<IActivityRepository, ActivityRepository>();
 
 var connectionString = builder.Configuration.GetConnectionString("IdentityConnection");
 builder.Services.AddDbContext<ToDoActivityAppAPIDbContext>(options => options.UseSqlServer(connectionString));
