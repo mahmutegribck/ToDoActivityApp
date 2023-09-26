@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rd/8vTrn5B154bwI+vIKoMC9tdaujoU7WTih9bkTjrRvNxXsOzdta/vCTV0G4iZivM8WaJQOgRjva6iyZT+3Pw==",
+  "dgSpecHash": "pcmh8KAJ7dSe229Ii1H/5VGnhnZZITZVeM/8+4pkavN6yAr0viL8g02GjkmdeEK09QLejU9lzxH2qC+aNy+EbA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.API\\ToDoActivityAppAPI.API.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\Mahmut\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Mahmut\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\Mahmut\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Mahmut\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.11\\microsoft.aspnetcore.authentication.jwtbearer.7.0.11.nupkg.sha512",
     "C:\\Users\\Mahmut\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\7.0.10\\microsoft.aspnetcore.cryptography.internal.7.0.10.nupkg.sha512",
     "C:\\Users\\Mahmut\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\7.0.10\\microsoft.aspnetcore.cryptography.keyderivation.7.0.10.nupkg.sha512",
     "C:\\Users\\Mahmut\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\7.0.10\\microsoft.aspnetcore.identity.entityframeworkcore.7.0.10.nupkg.sha512",

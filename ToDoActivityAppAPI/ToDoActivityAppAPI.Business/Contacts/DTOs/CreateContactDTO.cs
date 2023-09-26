@@ -14,9 +14,8 @@ namespace ToDoActivityAppAPI.Business.Contacts.DTOs
         [EmailAddress]
         public string EmailAddress { get; set; }
         public string Title { get; set; }
-        public string Text { get; set; }
-        public DateTime Date { get; set; }
-        public bool Check { get; set; }
+        public string Text { get; set; }      
+        
 
     }
 }

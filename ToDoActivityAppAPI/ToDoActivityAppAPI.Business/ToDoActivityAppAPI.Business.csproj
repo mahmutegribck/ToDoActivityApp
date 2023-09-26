@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ToDoActivityAppAPI.DataAccess\ToDoActivityAppAPI.DataAccess.csproj" />
     <ProjectReference Include="..\ToDoActivityAppAPI.Entity\ToDoActivityAppAPI.Entity.csproj" />
   </ItemGroup>
 

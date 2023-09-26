@@ -8,7 +8,7 @@ using ToDoActivityAppAPI.Entity.Entities;
 
 namespace ToDoActivityAppAPI.DataAccess.Activities
 {
-    internal class ActivityRepository : IActivityRepository
+    public class ActivityRepository : IActivityRepository
     {
         private readonly ToDoActivityAppAPIDbContext _context;
 
