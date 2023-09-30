@@ -17,28 +17,33 @@ namespace ToDoActivityAppAPI.DataAccess.ContactReplies
             _context = context;
         }
 
-        public async Task CreateContactReply(ContactReply contactReply)
+        public async Task<ContactReply> CreateContactReply(string IdentityUserId, ContactReply contactReply)
         {
             if (contactReply != null)
             {
+                contactReply.ApplicationUserId = IdentityUserId;
                 await _context.ContactReplies.AddAsync(contactReply);
                 await _context.SaveChangesAsync();
+                return contactReply;
             }
             else
             {
                 throw new Exception("ContactReply could not be created");
             }
-        }
+        }   
 
-        public async Task DeleteContactReply(int id)
+        public async Task DeleteContactReply(string IdentityUserId, int id)
         {
             var deleteContactReply = await _context.ContactReplies.FindAsync(id);
 
             if (deleteContactReply != null)
             {
-
-                _context.ContactReplies.Remove(deleteContactReply);
-                await _context.SaveChangesAsync();
+                if(deleteContactReply.ApplicationUserId == IdentityUserId)
+                {
+                    _context.ContactReplies.Remove(deleteContactReply);
+                    await _context.SaveChangesAsync();
+                }
+                throw new Exception("User is not delete this ContactReply");
 
             }
             else
@@ -74,20 +79,25 @@ namespace ToDoActivityAppAPI.DataAccess.ContactReplies
                 throw new Exception("Not Found Contact Reply");
             }
 
-        }
+        }   
 
-        public async Task UpdateContactReply(ContactReply contactReply)
+        public async Task<ContactReply> UpdateContactReply(int contactReplyId, string IdentityUserId, ContactReply contactReply)
         {
-            var contactReplyUpdate = await _context.ContactReplies.FindAsync(contactReply.ContactId);
+            var contactReplyUpdate = await _context.ContactReplies.FindAsync(contactReplyId);
 
             if(contactReplyUpdate != null)
             {
-                contactReplyUpdate.Title = contactReply.Title;
-                contactReplyUpdate.Text = contactReply.Text;
-                contactReplyUpdate.Date = contactReply.Date;
-                
-                _context.ContactReplies.Update(contactReplyUpdate);
-                await _context.SaveChangesAsync();
+                if(contactReplyUpdate.ApplicationUserId == IdentityUserId)
+                {
+                    contactReplyUpdate.Title = contactReply.Title;
+                    contactReplyUpdate.Text = contactReply.Text;
+                    contactReplyUpdate.Date = contactReply.Date;
+
+                    _context.ContactReplies.Update(contactReplyUpdate);
+                    await _context.SaveChangesAsync();
+                    return contactReplyUpdate;
+                }
+                throw new Exception("User is not update this ContactReply");
             }                                           
             else
             {

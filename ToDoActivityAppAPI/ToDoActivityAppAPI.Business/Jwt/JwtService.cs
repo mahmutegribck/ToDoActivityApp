@@ -27,7 +27,7 @@ namespace ToDoActivityAppAPI.Business.Jwt
         public async Task<JwtTokenDTO> CreateJwtToken(ApplicationUser user)
         {
             JwtTokenDTO jwtTokenDTO = new JwtTokenDTO();
-            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
+            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"] ?? string.Empty));
             SigningCredentials signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var roles = await _userManager.GetRolesAsync(user);
@@ -39,6 +39,7 @@ namespace ToDoActivityAppAPI.Business.Jwt
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id),
+                
 
             }.Union(roleClaims);
 
@@ -47,8 +48,8 @@ namespace ToDoActivityAppAPI.Business.Jwt
               audience: _configuration["Jwt:Audience"],
               issuer: _configuration["Jwt:Issuer"],
               claims: claims,
-              expires: DateTime.Now.AddMinutes(15),
-              notBefore: DateTime.UtcNow,
+              expires: DateTime.Now.AddHours(1),
+              //notBefore: DateTime.UtcNow,
               signingCredentials: signingCredentials
           );
 

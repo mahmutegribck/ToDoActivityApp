@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoActivityAppAPI.Entity.Entities;
 
-namespace ToDoActivityAppAPI.DataAccess.Activities
+namespace ToDoActivityAppAPI.DataAccess.Activities 
 {
     public class ActivityRepository : IActivityRepository
     {
@@ -34,7 +34,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
             }
         }
 
-        public async Task CreateActivity(Activity activity)
+        public async Task<Activity> CreateActivity(Activity activity)
         {
             if (activity != null)
             {
@@ -42,6 +42,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
                 activity.DayNumbers = (activity.EndTime - activity.StartTime).Days;
                 await _context.Activities.AddAsync(activity);
                 await _context.SaveChangesAsync();
+                return activity;
             }
             else
             {
@@ -122,9 +123,9 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
 
         }
 
-        public async Task UpdateActivity(string IdentityUserId, Activity activity)
+        public async Task<Activity> UpdateActivity(int activityId, string IdentityUserId, Activity activity)
         {
-            var activityUpdate = await _context.Activities.FindAsync(activity.ActivityId);
+            var activityUpdate = await _context.Activities.FindAsync(activityId);
 
             if (activityUpdate != null)
             {
@@ -142,6 +143,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
 
                     _context.Activities.Update(activityUpdate);
                     await _context.SaveChangesAsync();
+                    return activityUpdate;
 
                 }
                 else

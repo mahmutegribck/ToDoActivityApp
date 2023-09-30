@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoActivityAppAPI.Entity.Identity;
 
 namespace ToDoActivityAppAPI.Entity.Entities
 {
@@ -15,7 +16,11 @@ namespace ToDoActivityAppAPI.Entity.Entities
         public string Text { get; set; }
         public DateTime Date { get; set; }
 
+
         public Contact Contact { get; set; }
         public int ContactId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
+        public string ApplicationUserId { get; set; }
     }
 }
