@@ -54,6 +54,21 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ContactReplies",
+                columns: table => new
+                {
+                    ContactReplyId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContactReplies", x => x.ContactReplyId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -85,11 +100,11 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ActivityDaysNumber = table.Column<int>(type: "int", nullable: false),
-                    ActivityBudget = table.Column<double>(type: "float", nullable: false),
-                    ActivityLocation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DayNumbers = table.Column<int>(type: "int", nullable: false),
+                    Budget = table.Column<double>(type: "float", nullable: false),
+                    Location = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Timed = table.Column<bool>(type: "bit", nullable: false),
-                    ActivityDone = table.Column<bool>(type: "bit", nullable: false),
+                    Done = table.Column<bool>(type: "bit", nullable: false),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -194,10 +209,11 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                 {
                     ContactId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ContactEmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ContactCheck = table.Column<bool>(type: "bit", nullable: false),
+                    EmailAddress = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Check = table.Column<bool>(type: "bit", nullable: false),
                     ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -212,23 +228,24 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ContactReplies",
+                name: "Images",
                 columns: table => new
                 {
-                    ContactReplyId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ContactReplyText = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactReplyDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ContactId = table.Column<int>(type: "int", nullable: false)
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ImageData = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    ActivityId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ContactReplies", x => x.ContactReplyId);
+                    table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ContactReplies_Contacts_ContactId",
-                        column: x => x.ContactId,
-                        principalTable: "Contacts",
-                        principalColumn: "ContactId",
+                        name: "FK_Images_Activities_ActivityId",
+                        column: x => x.ActivityId,
+                        principalTable: "Activities",
+                        principalColumn: "ActivityId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -277,23 +294,19 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ContactReplies_ContactId",
-                table: "ContactReplies",
-                column: "ContactId",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Contacts_ApplicationUserId",
                 table: "Contacts",
                 column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_ActivityId",
+                table: "Images",
+                column: "ActivityId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Activities");
-
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -313,10 +326,16 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                 name: "ContactReplies");
 
             migrationBuilder.DropTable(
+                name: "Contacts");
+
+            migrationBuilder.DropTable(
+                name: "Images");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Contacts");
+                name: "Activities");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

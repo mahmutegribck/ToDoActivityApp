@@ -23,7 +23,7 @@ namespace ToDoActivityAppAPI.Entity.Entities
         [DefaultValue(false)]
         public bool Check { get; set; }
 
-        public ContactReply ContactReply { get; set; }
+        //public ContactReply ContactReply { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
 

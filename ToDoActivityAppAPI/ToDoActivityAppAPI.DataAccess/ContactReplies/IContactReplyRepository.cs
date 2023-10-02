@@ -11,8 +11,8 @@ namespace ToDoActivityAppAPI.DataAccess.ContactReplies
     {
         Task<List<ContactReply>> GetAllContactReplies();
         Task<ContactReply> GetContactReplyById(int id);
-        Task<ContactReply> CreateContactReply(string IdentityUserId, ContactReply contactReply);
-        Task<ContactReply> UpdateContactReply(int contactReplyId, string IdentityUserId, ContactReply contactReply);
-        Task DeleteContactReply(string IdentityUserId, int id);
+        Task<ContactReply> CreateContactReply(ContactReply contactReply);
+        Task<ContactReply> UpdateContactReply(int contactReplyId, ContactReply contactReply);
+        Task DeleteContactReply(int id);
     }
 }

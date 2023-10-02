@@ -33,5 +33,7 @@ namespace ToDoActivityAppAPI.Entity.Entities
         public ApplicationUser ApplicationUser { get; set; }
 
         public string ApplicationUserId { get; set; }
+
+        public ICollection<Image> Images { get; set; }
     }
 }

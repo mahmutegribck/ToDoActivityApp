@@ -17,10 +17,9 @@ namespace ToDoActivityAppAPI.Entity.Entities
         public DateTime Date { get; set; }
 
 
-        public Contact Contact { get; set; }
-        public int ContactId { get; set; }
+        //public Contact Contact { get; set; }
+        //public int ContactId { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
-        public string ApplicationUserId { get; set; }
+       
     }
 }

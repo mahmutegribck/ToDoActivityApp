@@ -136,28 +136,28 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActivityId"));
 
-                    b.Property<double>("ActivityBudget")
-                        .HasColumnType("float");
-
-                    b.Property<int>("ActivityDaysNumber")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("ActivityDone")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("ActivityLocation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("ApplicationUserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<double>("Budget")
+                        .HasColumnType("float");
+
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("DayNumbers")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Done")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("EndTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Location")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
@@ -192,17 +192,21 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("ContactCheck")
+                    b.Property<bool>("Check")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("ContactDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ContactEmailAddress")
+                    b.Property<string>("EmailAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ContactText")
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -221,22 +225,50 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ContactReplyId"));
 
-                    b.Property<int>("ContactId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ContactReplyDate")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ContactReplyText")
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ContactReplyId");
 
-                    b.HasIndex("ContactId")
-                        .IsUnique();
-
                     b.ToTable("ContactReplies");
+                });
+
+            modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ActivityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ActivityId");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Identity.ApplicationRole", b =>
@@ -416,21 +448,20 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.Navigation("ApplicationUser");
                 });
 
-            modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.ContactReply", b =>
+            modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Image", b =>
                 {
-                    b.HasOne("ToDoActivityAppAPI.Entity.Entities.Contact", "Contact")
-                        .WithOne("ContactReply")
-                        .HasForeignKey("ToDoActivityAppAPI.Entity.Entities.ContactReply", "ContactId")
+                    b.HasOne("ToDoActivityAppAPI.Entity.Entities.Activity", "Activity")
+                        .WithMany("Images")
+                        .HasForeignKey("ActivityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Contact");
+                    b.Navigation("Activity");
                 });
 
-            modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Contact", b =>
+            modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Activity", b =>
                 {
-                    b.Navigation("ContactReply")
-                        .IsRequired();
+                    b.Navigation("Images");
                 });
 #pragma warning restore 612, 618
         }

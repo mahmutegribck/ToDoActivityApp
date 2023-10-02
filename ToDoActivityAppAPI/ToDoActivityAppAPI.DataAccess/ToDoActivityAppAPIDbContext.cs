@@ -22,6 +22,8 @@ namespace ToDoActivityAppAPI.DataAccess
         public DbSet<Contact> Contacts { get; set; }
 
         public DbSet<ContactReply> ContactReplies { get; set; }
+
+        public DbSet<Image> Images { get; set; }
         
         
     }

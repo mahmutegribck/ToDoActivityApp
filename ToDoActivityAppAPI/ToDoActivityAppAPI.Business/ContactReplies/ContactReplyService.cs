@@ -21,15 +21,15 @@ namespace ToDoActivityAppAPI.Business.ContactReplies
             _contactReplyRepository = contactReplyRepository;
         }
 
-        public async Task<GetContactReplyDTO> CreateContactReply(string IdentityUserId, CreateContactReplyDTO createContactReplyDTO)
+        public async Task<GetContactReplyDTO> CreateContactReply(CreateContactReplyDTO createContactReplyDTO)
         {
             ContactReply contactReply = _mapper.Map<ContactReply>(createContactReplyDTO);
-            return _mapper.Map<GetContactReplyDTO>(await _contactReplyRepository.CreateContactReply(IdentityUserId, contactReply));
+            return _mapper.Map<GetContactReplyDTO>(await _contactReplyRepository.CreateContactReply(contactReply));
         }
 
-        public async Task DeleteContactReply(string IdentityUserId, int id)
+        public async Task DeleteContactReply( int id)
         {
-            await _contactReplyRepository.DeleteContactReply(IdentityUserId, id);
+            await _contactReplyRepository.DeleteContactReply(id);
         }
 
         public async Task<List<GetContactReplyDTO>> GetAllContactReplies()
@@ -44,10 +44,10 @@ namespace ToDoActivityAppAPI.Business.ContactReplies
             return contactReply;
         }
 
-        public async Task<GetContactReplyDTO> UpdateContactReply(int contactReplyId, string IdentityUserId, UpdateContactReplyDTO updateContactReplyDTO)
+        public async Task<GetContactReplyDTO> UpdateContactReply(int contactReplyId, UpdateContactReplyDTO updateContactReplyDTO)
         {
             ContactReply contactReply = _mapper.Map<ContactReply>(updateContactReplyDTO);
-            return _mapper.Map<GetContactReplyDTO>(await _contactReplyRepository.UpdateContactReply(contactReplyId, IdentityUserId, contactReply));
+            return _mapper.Map<GetContactReplyDTO>(await _contactReplyRepository.UpdateContactReply(contactReplyId, contactReply));
         }
     }
 }
