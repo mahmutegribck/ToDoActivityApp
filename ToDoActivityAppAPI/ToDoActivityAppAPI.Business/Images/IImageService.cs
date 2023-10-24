@@ -9,9 +9,12 @@ namespace ToDoActivityAppAPI.Business.Images
 {
     public interface IImageService
     {
+
         Task AddImage(AddImageDTO addImageDTO);
         Task DeleteImage(int imageId);
         Task DeleteAllActivityImages(int activityId);
+        Task DeleteActivityImages(int[] imageID, int activityId);
+        Task ImageMakeFavorite(int[] imageID);
         Task<List<GetImageDTO>> GetActivityImagesById(int activityId);
     }
 }

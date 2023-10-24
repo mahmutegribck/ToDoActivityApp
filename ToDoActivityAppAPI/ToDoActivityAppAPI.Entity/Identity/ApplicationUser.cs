@@ -13,6 +13,6 @@ namespace ToDoActivityAppAPI.Entity.Identity
 
         public string Surname { get; set; }
 
-        public string Location { get; set; }
+        public string? Location { get; set; }
     }
 }

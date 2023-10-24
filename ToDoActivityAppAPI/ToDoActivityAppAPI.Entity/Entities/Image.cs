@@ -14,6 +14,8 @@ namespace ToDoActivityAppAPI.Entity.Entities
         public string FileName { get; set; }
         public string ContentType { get; set; }
         public byte[] ImageData { get; set; }
+        public bool IsFavorite { get; set; }    
+        public string Text { get; set; }
 
         public Activity Activity { get; set; }
 

@@ -28,6 +28,18 @@ namespace ToDoActivityAppAPI.API.Controllers
 
         }
 
+        [HttpPatch]
+        [Route("[action]")]
+        //Resim favorile
+        public async Task<IActionResult> ImageMakeFavorite(int[] imageID)
+        {
+            if (imageID == null)
+                return NotFound();
+
+            await _imageService.ImageMakeFavorite(imageID);
+            return Ok();
+        }
+
         [HttpDelete]
         [Route("[action]")]
         public async Task<IActionResult> DeleteAllActivityImages(int activityId)
@@ -47,6 +59,17 @@ namespace ToDoActivityAppAPI.API.Controllers
                 return NotFound();
 
             await _imageService.DeleteImage(imageId);
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("[action]")]
+        public async Task<IActionResult> DeleteActivityImages(int[] imageId, int activityId)
+        {
+            if (imageId == null)
+                return NotFound();
+
+            await _imageService.DeleteActivityImages(imageId, activityId);
             return Ok();
         }
 

@@ -10,11 +10,10 @@ namespace ToDoActivityAppAPI.DataAccess.Images
     public interface IImageRepository
     {
         Task AddImage(Image image);
-        
         Task DeleteImage(int imageId);
-
         Task DeleteAllActivityImages(int activityId);
-
+        Task DeleteActivityImages(int[] imageID, int activityId);
+        Task ImageMakeFavorite(int[] imageID);
         Task<List<Image>> GetActivityImagesById(int activityId);
     }
 }

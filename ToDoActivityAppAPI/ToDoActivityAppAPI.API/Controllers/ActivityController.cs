@@ -44,8 +44,7 @@ namespace ToDoActivityAppAPI.API.Controllers
         [Route("[action]")]
         public async Task<IActionResult> CreateActivity([FromBody] CreateActivityDTO createActivityDTO)
         {
-            //var identity = HttpContext.User.Identity as ClaimsIdentity;
-            //var userId = identity?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+            
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)

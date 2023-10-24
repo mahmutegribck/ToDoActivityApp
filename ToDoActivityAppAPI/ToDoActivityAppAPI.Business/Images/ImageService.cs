@@ -11,7 +11,7 @@ using ToDoActivityAppAPI.Entity.Entities;
 
 namespace ToDoActivityAppAPI.Business.Images
 {
-    public  class ImageService : IImageService
+    public class ImageService : IImageService
     {
         private readonly IImageRepository _imageRepository;
         private readonly IMapper _mapper;
@@ -30,7 +30,7 @@ namespace ToDoActivityAppAPI.Business.Images
                 {
                     continue;
                 }
-                   
+
 
                 using (var stream = new MemoryStream())
                 {
@@ -47,7 +47,7 @@ namespace ToDoActivityAppAPI.Business.Images
                     await _imageRepository.AddImage(image);
                 }
             }
-            
+
         }
 
         public async Task DeleteAllActivityImages(int activityId)
@@ -60,6 +60,13 @@ namespace ToDoActivityAppAPI.Business.Images
             await _imageRepository.DeleteImage(imageId);
         }
 
+        public async Task DeleteActivityImages(int[] imageID, int activityId)
+        {
+
+            await _imageRepository.DeleteActivityImages(imageID, activityId);
+
+        }
+
         public async Task<List<GetImageDTO>> GetActivityImagesById(int activityId)
         {
             var images = await _imageRepository.GetActivityImagesById(activityId);
@@ -67,6 +74,11 @@ namespace ToDoActivityAppAPI.Business.Images
             var imagesMetadata = _mapper.Map<List<GetImageDTO>>(images);
 
             return imagesMetadata;
+        }
+
+        public async Task ImageMakeFavorite(int[] imageID)
+        {
+            await _imageRepository.ImageMakeFavorite(imageID);
         }
     }
 }

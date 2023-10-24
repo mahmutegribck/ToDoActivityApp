@@ -11,5 +11,7 @@ namespace ToDoActivityAppAPI.Business.Images.DTOs
     {
         public int ActivityId { get; set; }
         public List<IFormFile> Images { get; set; }
+        public bool IsFavorite { get; set; }
+        public string Text { get; set; }
     }
 }
