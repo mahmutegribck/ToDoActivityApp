@@ -18,7 +18,7 @@ namespace ToDoActivityAppAPI.API.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> AddImage([FromBody] AddImageDTO addImageDTO)
+        public async Task<IActionResult> AddImage([FromForm] AddImageDTO addImageDTO)
         {
             if (addImageDTO == null)
                 return NotFound();
@@ -79,8 +79,9 @@ namespace ToDoActivityAppAPI.API.Controllers
         {
             if (activityId == 0)
                 return NotFound();
-
+            
             return Ok(await _imageService.GetActivityImagesById(activityId));
+
         }
     }
 }

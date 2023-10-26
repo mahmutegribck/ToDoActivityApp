@@ -271,6 +271,13 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
+                    b.Property<bool>("IsFavorite")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityId");
@@ -401,16 +408,16 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "aceb16ac-8940-4867-814a-dcb23eafe7ea",
+                            ConcurrencyStamp = "0d6af0d3-d0d9-4c71-84e9-df2ae42349b1",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEHpBe1lMlDXO3p1c3Vr5a68GtNpHGkkayil959JhJQb3dCHtuZx/sEJeBwQmr8QaRA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECGRd+FcHKrw3M94n1jya2REnCCkkjiRmeVCXWd+hDqUFMtK/T8ygwVXa3wxeKfP5Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "14911ffd-f398-41c2-b924-4a7a6232163b",
+                            SecurityStamp = "871385e0-cee3-4b91-bed7-cddfdccde784",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "Admin"

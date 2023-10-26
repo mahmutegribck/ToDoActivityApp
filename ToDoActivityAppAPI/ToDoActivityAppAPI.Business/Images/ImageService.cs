@@ -42,6 +42,8 @@ namespace ToDoActivityAppAPI.Business.Images
                         ContentType = imageFile.ContentType,
                         ImageData = stream.ToArray(),
                         ActivityId = addImageDTO.ActivityId,
+                        IsFavorite = addImageDTO.IsFavorite,
+                        Text = addImageDTO.Text
                     };
 
                     await _imageRepository.AddImage(image);

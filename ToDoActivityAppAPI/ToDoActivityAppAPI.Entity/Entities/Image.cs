@@ -18,7 +18,6 @@ namespace ToDoActivityAppAPI.Entity.Entities
         public string Text { get; set; }
 
         public Activity Activity { get; set; }
-
         public int ActivityId { get; set; }
     }
 }

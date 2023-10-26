@@ -62,6 +62,7 @@ namespace ToDoActivityAppAPI.DataAccess.Images
             List<Image> images = await _context.Images.Where(i => i.ActivityId == activityId).ToListAsync();
 
             return images;
+
         }
 
         public async Task ImageMakeFavorite(int[] imageID)

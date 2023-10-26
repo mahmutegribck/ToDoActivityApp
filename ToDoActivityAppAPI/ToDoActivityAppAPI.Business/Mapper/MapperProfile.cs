@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using ToDoActivityAppAPI.Business.Activities.DTOs;
 using ToDoActivityAppAPI.Business.ContactReplies.DTOs;
 using ToDoActivityAppAPI.Business.Contacts.DTOs;
+using ToDoActivityAppAPI.Business.Images.DTOs;
 using ToDoActivityAppAPI.Entity.Entities;
 using Activity = ToDoActivityAppAPI.Entity.Entities.Activity;
 
@@ -28,6 +29,10 @@ namespace ToDoActivityAppAPI.Business.Mapper
             CreateMap<ContactReply, CreateContactReplyDTO>().ReverseMap();
             CreateMap<ContactReply, GetContactReplyDTO>().ReverseMap(); 
             CreateMap<ContactReply, UpdateContactReplyDTO>().ReverseMap();  
+
+            CreateMap<Image, GetImageDTO>().ReverseMap();
+            CreateMap<Image, AddImageDTO>().ReverseMap();
+
         }
     }
 }

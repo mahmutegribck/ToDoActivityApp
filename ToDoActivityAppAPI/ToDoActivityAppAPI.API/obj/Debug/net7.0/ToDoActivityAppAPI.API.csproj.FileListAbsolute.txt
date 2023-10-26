@@ -82,11 +82,10 @@ C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.AP
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\obj\Debug\net7.0\ToDoActivityAppAPI.API.pdb
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\obj\Debug\net7.0\ToDoActivityAppAPI.API.genruntimeconfig.cache
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\obj\Debug\net7.0\ref\ToDoActivityAppAPI.API.dll
-C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\obj\Debug\net7.0\ToDoActivityAppAPI.API.Properties.Resources.resources
-C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\obj\Debug\net7.0\ToDoActivityAppAPI.API.csproj.GenerateResource.cache
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\ToDoActivityAppAPI.Business.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\ToDoActivityAppAPI.Business.pdb
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\obj\Debug\net7.0\ToDoActivityAppAPI.API.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\ToDoActivityAppAPI.API.staticwebassets.runtime.json
