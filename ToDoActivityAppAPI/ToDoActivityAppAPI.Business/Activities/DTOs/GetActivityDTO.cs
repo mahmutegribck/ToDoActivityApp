@@ -21,6 +21,5 @@ namespace ToDoActivityAppAPI.Business.Activities.DTOs
         public string Location { get; set; }
         public bool Timed { get; set; }
         public bool Done { get; set; }
-        public string ApplicationUserId { get; set; }
     }
 }

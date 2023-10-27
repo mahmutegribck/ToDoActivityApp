@@ -12,13 +12,15 @@ namespace ToDoActivityAppAPI.Business.Activities.DTOs
     {      
         public string Title { get; set; }
         public string Text { get; set; }
-        public DateTime CreateTime { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public int DayNumbers { get; set; }
-        public double Budget { get; set; }
-        public string Location { get; set; }
+        public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
+        public double? Budget { get; set; }
+        public string? Location { get; set; }
+
+        [DefaultValue(false)]
         public bool Timed { get; set; }
+
+        [DefaultValue(false)]
         public bool Done { get; set; }
     }
 }

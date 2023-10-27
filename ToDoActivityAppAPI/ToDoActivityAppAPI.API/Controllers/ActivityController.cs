@@ -23,14 +23,14 @@ namespace ToDoActivityAppAPI.API.Controllers
         {
             _activityService = activityService;
             _userManager = userManager;
-        }
+         }
 
 
-        [HttpGet]
-        [Route("[action]")]
-        public async Task<IActionResult> ActivityDone(int id)
+        [HttpPatch]
+        [Route("[action]/{activityId}")]
+        public async Task<IActionResult> ActivityDone(int activityId)
         {
-            var activityDone = await _activityService.ActivityDone(id);
+            var activityDone = await _activityService.ActivityDone(activityId);
             if (activityDone != null)
             {
                 return Ok(activityDone);
@@ -53,7 +53,7 @@ namespace ToDoActivityAppAPI.API.Controllers
 
                 if (activity != null)
                 {
-                    return Ok(activity);
+                    return Ok();
                 }
                 return NotFound();
             }
@@ -62,13 +62,14 @@ namespace ToDoActivityAppAPI.API.Controllers
         }
 
         [HttpDelete]
-        [Route("[action]")]
-        public async Task<IActionResult> DeleteActivity(int id)
+        [Route("[action]/{activityId}")]
+        public async Task<IActionResult> DeleteActivity(int activityId)
         {
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser != null)
             {
-                await _activityService.DeleteActivity(currentUser.Id, id);
+                await _activityService.DeleteActivity(currentUser.Id, activityId);
+                return Ok();
             }
             return Unauthorized();
         }
@@ -94,14 +95,14 @@ namespace ToDoActivityAppAPI.API.Controllers
         }
 
         [HttpGet]
-        [Route("[action]")]
-        public async Task<IActionResult> GetUserActivityById(int id)
+        [Route("[action]/{activityId}")]
+        public async Task<IActionResult> GetUserActivityById(int activityId)
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)
             {
-                return Ok(await _activityService.GetUserActivityById(currentUser.Id, id));
+                return Ok(await _activityService.GetUserActivityById(currentUser.Id, activityId));
             }
             return Unauthorized();
         }
@@ -171,5 +172,9 @@ namespace ToDoActivityAppAPI.API.Controllers
             }
             return Unauthorized();
         }
+
+        //[HttpPatch]
+        //[Route("[action]/{activityId}")]
+        //public async Task<IActionResult> 
     }
 }

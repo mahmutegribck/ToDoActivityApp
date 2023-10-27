@@ -147,30 +147,28 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("Budget")
+                    b.Property<double?>("Budget")
                         .HasColumnType("float");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DayNumbers")
+                    b.Property<int?>("DayNumbers")
                         .HasColumnType("int");
 
                     b.Property<bool>("Done")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime?>("StartTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Timed")
@@ -336,6 +334,9 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<DateTime?>("Birthdate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -408,16 +409,16 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0d6af0d3-d0d9-4c71-84e9-df2ae42349b1",
+                            ConcurrencyStamp = "ebafb324-3bb4-479a-bd18-b4f73178812b",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAECGRd+FcHKrw3M94n1jya2REnCCkkjiRmeVCXWd+hDqUFMtK/T8ygwVXa3wxeKfP5Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEKxD9qEmNdf1L/nhPgBYclhysAxDYjNNm71WyLk1KhzlbUpd6GZf2MYQSM4PlqOixw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "871385e0-cee3-4b91-bed7-cddfdccde784",
+                            SecurityStamp = "1bebc3f8-9f9b-448d-8a35-ee38942075a5",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "Admin"

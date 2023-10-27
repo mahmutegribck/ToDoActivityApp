@@ -6,10 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ToDoActivityAppAPI.Business.Activities.DTOs;
+using ToDoActivityAppAPI.Business.Auth.DTOs;
 using ToDoActivityAppAPI.Business.ContactReplies.DTOs;
 using ToDoActivityAppAPI.Business.Contacts.DTOs;
 using ToDoActivityAppAPI.Business.Images.DTOs;
 using ToDoActivityAppAPI.Entity.Entities;
+using ToDoActivityAppAPI.Entity.Identity;
 using Activity = ToDoActivityAppAPI.Entity.Entities.Activity;
 
 namespace ToDoActivityAppAPI.Business.Mapper
@@ -33,6 +35,10 @@ namespace ToDoActivityAppAPI.Business.Mapper
             CreateMap<Image, GetImageDTO>().ReverseMap();
             CreateMap<Image, AddImageDTO>().ReverseMap();
 
+
+            CreateMap<ApplicationUser, LoginDto>().ReverseMap();
+            CreateMap<ApplicationUser, RegisterDto>().ReverseMap();
+            CreateMap<ApplicationUser, ResetPasswordDto>().ReverseMap();
         }
     }
 }

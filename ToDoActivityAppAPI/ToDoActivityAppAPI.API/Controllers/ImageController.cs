@@ -74,7 +74,7 @@ namespace ToDoActivityAppAPI.API.Controllers
         }
 
         [HttpGet]
-        [Route("[action]")]
+        [Route("[action]/{activityId}")]
         public async Task<IActionResult> GetActivityImagesById(int activityId)
         {
             if (activityId == 0)
