@@ -30,13 +30,40 @@ namespace ToDoActivityAppAPI.API.Controllers
         [Route("[action]/{activityId}")]
         public async Task<IActionResult> ActivityDone(int activityId)
         {
-            var activityDone = await _activityService.ActivityDone(activityId);
-            if (activityDone != null)
-            {
-                return Ok(activityDone);
-            }
+            var currentUser = await _userManager.GetUserAsync(User);
 
-            return NotFound();
+            if (currentUser != null)
+            {
+                if(activityId != 0)
+                {
+                    await _activityService.ActivityDone(currentUser.Id, activityId);
+                    return Ok();
+                }
+                return NotFound(); 
+
+            }
+            return Unauthorized();
+
+        }
+
+        [HttpPatch]
+        [Route("[action]/{activityId}")]
+        public async Task<IActionResult> ActivityNotDone(int activityId)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (currentUser != null)
+            {
+                if (activityId != 0)
+                {
+                    await _activityService.ActivityNotDone(currentUser.Id, activityId);
+                    return Ok();
+                }
+                return NotFound();
+
+            }
+            return Unauthorized();
+
 
         }
 
@@ -46,6 +73,7 @@ namespace ToDoActivityAppAPI.API.Controllers
         {
             
             var currentUser = await _userManager.GetUserAsync(User);
+
 
             if (currentUser != null)
             {

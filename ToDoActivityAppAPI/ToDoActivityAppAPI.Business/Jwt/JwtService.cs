@@ -48,8 +48,7 @@ namespace ToDoActivityAppAPI.Business.Jwt
               audience: _configuration["Jwt:Audience"],
               issuer: _configuration["Jwt:Issuer"],
               claims: claims,
-              expires: DateTime.Now.AddHours(1),
-              //notBefore: DateTime.UtcNow,
+              
               signingCredentials: signingCredentials
           );
 

@@ -178,6 +178,9 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("ActivityId");
 
                     b.HasIndex("ApplicationUserId");
@@ -409,16 +412,16 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ebafb324-3bb4-479a-bd18-b4f73178812b",
+                            ConcurrencyStamp = "a7bf1a2b-4fcd-47e9-b8ad-e9d86c71335b",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKxD9qEmNdf1L/nhPgBYclhysAxDYjNNm71WyLk1KhzlbUpd6GZf2MYQSM4PlqOixw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECA8gPmGHdQK4sSjr4vp++Zqn0Fa9WP1skxtaIHvoYDl6bgOvx64zjFmvkSh5+e7XA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1bebc3f8-9f9b-448d-8a35-ee38942075a5",
+                            SecurityStamp = "ced74dbd-8d90-4027-8c24-ad9acd709853",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "Admin"

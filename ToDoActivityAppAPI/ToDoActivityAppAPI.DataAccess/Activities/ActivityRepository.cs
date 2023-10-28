@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ToDoActivityAppAPI.Entity.Entities;
 
-namespace ToDoActivityAppAPI.DataAccess.Activities 
+namespace ToDoActivityAppAPI.DataAccess.Activities
 {
     public class ActivityRepository : IActivityRepository
     {
@@ -17,16 +17,45 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
             _context = context;
         }
 
-        public async Task<Activity> ActivityDone(int id)
+        public async Task ActivityDone(string IdentityUserId, int id)
         {
             var activityDone = await _context.Activities.FindAsync(id);
 
             if (activityDone != null)
             {
-                activityDone.Done = true;
-                _context.Activities.Update(activityDone);
-                await _context.SaveChangesAsync();
-                return activityDone;
+                if (activityDone.ApplicationUserId == IdentityUserId)
+                {
+                    activityDone.Done = false;
+                    _context.Activities.Update(activityDone);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("User is not change this activity");
+                }
+            }
+            else
+            {
+                throw new Exception("Not Found Activity");
+            }
+        }
+
+        public async Task ActivityNotDone(string IdentityUserId, int id)
+        {
+            var activityDone = await _context.Activities.FindAsync(id);
+
+            if (activityDone != null)
+            {
+                if (activityDone.ApplicationUserId == IdentityUserId)
+                {
+                    activityDone.Done = false;
+                    _context.Activities.Update(activityDone);
+                    await _context.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("User is not change this activity");
+                }
             }
             else
             {
@@ -38,7 +67,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         {
             if (activity != null)
             {
-                activity.CreateTime = DateTime.Now;
+                activity.CreateTime = DateTime.UtcNow;
                 activity.DayNumbers = (activity.EndTime - activity.StartTime)?.Days;
                 await _context.Activities.AddAsync(activity);
                 await _context.SaveChangesAsync();
@@ -133,7 +162,8 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
                 {
                     activityUpdate.Title = activity.Title;
                     activityUpdate.Text = activity.Text;
-                    activityUpdate.CreateTime = activity.CreateTime;
+                    activityUpdate.CreateTime = activityUpdate.CreateTime;
+                    activityUpdate.UpdateTime = DateTime.UtcNow;
                     activityUpdate.StartTime = activity.StartTime;
                     activityUpdate.EndTime = activity.EndTime;
                     activityUpdate.DayNumbers = (activity.EndTime - activity.StartTime)?.Days;
@@ -204,7 +234,7 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         {
             var activies = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Budget > MinButget && a.Budget < MaxButget).ToListAsync();
 
-            if(activies.Count > 0)
+            if (activies.Count > 0)
             {
                 return activies;
             }

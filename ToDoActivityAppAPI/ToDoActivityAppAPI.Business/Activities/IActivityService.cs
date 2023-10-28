@@ -15,7 +15,8 @@ namespace ToDoActivityAppAPI.Business.Activities
         Task<GetActivityDTO> UpdateActivity(int activityId, string IdentityUserId, UpdateActivityDTO updateActivityDTO);
         Task DeleteActivity(string IdentityUserId, int activityId);
         Task<List<GetActivityDTO>> GetAllUserActivities(string IdentityUserId);
-        Task<GetActivityDTO> ActivityDone(int id);
+        Task ActivityDone(string IdentityUserId, int id);
+        Task ActivityNotDone(string IdentityUserId, int id);
         Task<List<GetActivityDTO>> GetUserActiviesDone(string IdentityUserId);
         Task<List<GetActivityDTO>> GetUserActiviesNotDone(string IdentityUserId);
         Task<List<GetActivityDTO>> GetUserActiviesByNumberOfDays(string IdentityUserId, int MinDay, int MaxDay);

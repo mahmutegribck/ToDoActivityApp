@@ -21,9 +21,14 @@ namespace ToDoActivityAppAPI.Business.Activities
             _mapper = mapper;
         }
 
-        public async Task<GetActivityDTO> ActivityDone(int id)
+        public async Task ActivityDone(string IdentityUserId, int id)
         {
-            return _mapper.Map<GetActivityDTO>(await _activityRepository.ActivityDone(id));
+            await _activityRepository.ActivityDone(IdentityUserId, id);
+        }
+
+        public async Task ActivityNotDone(string IdentityUserId, int id)
+        {
+            await _activityRepository.ActivityNotDone(IdentityUserId, id);
         }
 
         public async Task<GetActivityDTO> CreateActivity(string IdentityUserId, CreateActivityDTO createActivityDTO)
