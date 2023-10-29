@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Data.SqlClient;
 using System.Security.Claims;
 using ToDoActivityAppAPI.Business.Activities;
@@ -23,186 +24,243 @@ namespace ToDoActivityAppAPI.API.Controllers
         {
             _activityService = activityService;
             _userManager = userManager;
-         }
+        }
 
 
-        [HttpPatch]
-        [Route("[action]/{activityId}")]
+
+        [HttpPatch("[action]/{activityId}")]
         public async Task<IActionResult> ActivityDone(int activityId)
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)
             {
-                if(activityId != 0)
+                if (activityId != 0 && await _activityService.ActivityDone(currentUser.Id, activityId))
                 {
-                    await _activityService.ActivityDone(currentUser.Id, activityId);
                     return Ok();
                 }
-                return NotFound(); 
-
+                return NotFound();
             }
             return Unauthorized();
-
         }
 
-        [HttpPatch]
-        [Route("[action]/{activityId}")]
+
+        [HttpPatch("[action]/{activityId}")]
         public async Task<IActionResult> ActivityNotDone(int activityId)
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)
             {
-                if (activityId != 0)
+                if (activityId != 0 && await _activityService.ActivityNotDone(currentUser.Id, activityId))
                 {
-                    await _activityService.ActivityNotDone(currentUser.Id, activityId);
                     return Ok();
                 }
                 return NotFound();
-
             }
             return Unauthorized();
-
-
         }
 
-        [HttpPost]
-        [Route("[action]")]
+
+        [HttpPost("[action]")]
         public async Task<IActionResult> CreateActivity([FromBody] CreateActivityDTO createActivityDTO)
         {
-            
             var currentUser = await _userManager.GetUserAsync(User);
-
 
             if (currentUser != null)
             {
-                var activity = await _activityService.CreateActivity(currentUser.Id, createActivityDTO);
+                if (await _activityService.CreateActivity(currentUser.Id, createActivityDTO))
+                {
+                    return Ok();
+                }
 
-                if (activity != null)
+            }
+            return Unauthorized();
+        }
+
+
+        [HttpDelete("[action]/{activityId}")]
+        public async Task<IActionResult> DeleteUserActivityById(int activityId)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser != null)
+            {
+                if (await _activityService.DeleteUserActivityById(currentUser.Id, activityId))
                 {
                     return Ok();
                 }
                 return NotFound();
             }
             return Unauthorized();
-
         }
 
-        [HttpDelete]
-        [Route("[action]/{activityId}")]
-        public async Task<IActionResult> DeleteActivity(int activityId)
+
+        [HttpDelete("[action]/")]
+        public async Task<IActionResult> DeleteUserAllActivitiesById([FromQuery] int[] activityId)
         {
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser != null)
             {
-                await _activityService.DeleteActivity(currentUser.Id, activityId);
-                return Ok();
+                if (await _activityService.DeleteUserAllActivitiesById(currentUser.Id, activityId))
+                {
+                    return Ok();
+                }
+                return NotFound();
             }
             return Unauthorized();
         }
 
-        [HttpGet]
-        [Route("[action]")]
-        public async Task<IActionResult> GetAllActivities()
+
+        [HttpDelete("[action]")]
+        public async Task<IActionResult> DeleteUserAllActivities()
         {
-            return Ok(await _activityService.GetAllActivities());
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser != null)
+            {
+                if (await _activityService.DeleteUserAllActivities(currentUser.Id))
+                {
+                    return Ok();
+                }
+                return NotFound();
+            }
+            return Unauthorized();
         }
 
-        [HttpGet]
-        [Route("[action]")]
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetAllActivities()
+        {
+            var allActivities = await _activityService.GetAllActivities();
+            if (allActivities.Count != 0)
+            {
+                return Ok(allActivities);
+            }
+            return NotFound();
+        }
+
+
+        [HttpGet("[action]")]
         public async Task<IActionResult> GetAllUserActivities()
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)
             {
-                return Ok(await _activityService.GetAllUserActivities(currentUser.Id));
+                var allUserActivities = await _activityService.GetAllUserActivities(currentUser.Id);
+                if (allUserActivities.Count != 0)
+                {
+                    return Ok(allUserActivities);
+                }
+                return NotFound();
             }
             return Unauthorized();
         }
 
-        [HttpGet]
-        [Route("[action]/{activityId}")]
+
+        [HttpGet("[action]/{activityId}")]
         public async Task<IActionResult> GetUserActivityById(int activityId)
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)
             {
-                return Ok(await _activityService.GetUserActivityById(currentUser.Id, activityId));
+                var userActivityByIdawait = _activityService.GetUserActivityById(currentUser.Id, activityId);
+                if (userActivityByIdawait != null)
+                {
+                    return Ok(userActivityByIdawait);
+                }
+                return NotFound();
             }
             return Unauthorized();
         }
 
 
-        [HttpPut]
-        [Route("[action]")]
+        [HttpPut("[action]/{activityId}")]
         public async Task<IActionResult> UpdateActivity(int activityId, [FromBody] UpdateActivityDTO updateActivityDTO)
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)
             {
-                return Ok(await _activityService.UpdateActivity(activityId, currentUser.Id, updateActivityDTO));
+                if (await _activityService.UpdateActivity(activityId, currentUser.Id, updateActivityDTO))
+                {
+                    return Ok();
+                }
+                return NotFound();
             }
             return Unauthorized();
         }
 
-        [HttpGet]
-        [Route("[action]")]
-        public async Task<IActionResult> GetUserActiviesDone()
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetUserActivitiesDone()
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)
             {
-                return Ok(await _activityService.GetUserActiviesDone(currentUser.Id));
+                var userActiviesDone = await _activityService.GetUserActivitiesDone(currentUser.Id);
+                if (userActiviesDone.Count != 0)
+                {
+                    return Ok(userActiviesDone);
+                }
+                return NotFound();
             }
             return Unauthorized();
         }
 
-        [HttpGet]
-        [Route("[action]")]
-        public async Task<IActionResult> GetUserActiviesNotDone()
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetUserActivitiesNotDone()
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)
             {
-                return Ok(await _activityService.GetUserActiviesNotDone(currentUser.Id));
+                var userActivitiesNotDone = await _activityService.GetUserActivitiesNotDone(currentUser.Id);
+                if (userActivitiesNotDone.Count != 0)
+                {
+                    return Ok(userActivitiesNotDone);
+                }
+                return NotFound();
+
             }
             return Unauthorized();
         }
+        
 
-        [HttpGet]
-        [Route("[action]")]
-        public async Task<IActionResult> GetUserActiviesByNumberOfDays(int MinDay, int MaxDay)
+        [HttpGet("[action]/{minDay}/{maxDay}")]
+        public async Task<IActionResult> GetUserActivitiesByNumberOfDays(int minDay, int maxDay)
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)
             {
-                return Ok(await _activityService.GetUserActiviesByNumberOfDays(currentUser.Id, MinDay, MaxDay));
+                var userActivitiesByNumberOfDays = await _activityService.GetUserActivitiesByNumberOfDays(currentUser.Id, minDay, maxDay);
+                if (userActivitiesByNumberOfDays.Count != 0 && minDay >= 0 && maxDay >= 0 && maxDay >= minDay)
+                {
+                    return Ok(userActivitiesByNumberOfDays);
+                }
+                return NotFound();
             }
             return Unauthorized();
         }
 
-        [HttpGet]
-        [Route("[action]")]
-        public async Task<IActionResult> GetUserActiviesByButget(int MinButget, int MaxButget)
+
+        [HttpGet("[action]/{minBudget}/{maxBudget}")]
+        public async Task<IActionResult> GetUserActivitiesByButget(int minBudget, int maxBudget)
         {
             var currentUser = await _userManager.GetUserAsync(User);
 
             if (currentUser != null)
             {
-                return Ok(await _activityService.GetUserActiviesByButget(currentUser.Id, MinButget, MaxButget));
+                var userActivitiesByButget = await _activityService.GetUserActivitiesByButget(currentUser.Id, minBudget, maxBudget);
+                if (userActivitiesByButget.Count != 0 && minBudget >= 0 && maxBudget >= 0 && maxBudget >= minBudget)
+                {
+                    return Ok(userActivitiesByButget);
+                }
+                return NotFound();
             }
             return Unauthorized();
         }
-
-        //[HttpPatch]
-        //[Route("[action]/{activityId}")]
-        //public async Task<IActionResult> 
     }
 }

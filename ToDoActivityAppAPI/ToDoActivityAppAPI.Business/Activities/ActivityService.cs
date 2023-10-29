@@ -21,28 +21,38 @@ namespace ToDoActivityAppAPI.Business.Activities
             _mapper = mapper;
         }
 
-        public async Task ActivityDone(string IdentityUserId, int id)
+        public async Task<bool> ActivityDone(string IdentityUserId, int activityId)
         {
-            await _activityRepository.ActivityDone(IdentityUserId, id);
+            return await _activityRepository.ActivityDone(IdentityUserId, activityId);
         }
 
-        public async Task ActivityNotDone(string IdentityUserId, int id)
+        public async Task<bool> ActivityNotDone(string IdentityUserId, int activityId)
         {
-            await _activityRepository.ActivityNotDone(IdentityUserId, id);
+            return await _activityRepository.ActivityNotDone(IdentityUserId, activityId);
         }
 
-        public async Task<GetActivityDTO> CreateActivity(string IdentityUserId, CreateActivityDTO createActivityDTO)
+        public async Task<bool> CreateActivity(string IdentityUserId, CreateActivityDTO createActivityDTO)
         {
             Activity activity = _mapper.Map<Activity>(createActivityDTO);
             activity.ApplicationUserId = IdentityUserId;
-            return _mapper.Map<GetActivityDTO>(await _activityRepository.CreateActivity(activity));
+          
+            return await _activityRepository.CreateActivity(activity);
         }
 
-        public async Task DeleteActivity(string IdentityUserId, int activityId)
+        public async Task<bool> DeleteUserActivityById(string IdentityUserId, int activityId)
         {
-            await _activityRepository.DeleteActivity(IdentityUserId, activityId);
+            return await _activityRepository.DeleteUserActivityById(IdentityUserId, activityId);
         }
 
+        public async Task<bool> DeleteUserAllActivitiesById(string IdentityUserId, int[] activityId)
+        {
+            return await _activityRepository.DeleteUserAllActivitiesById(IdentityUserId, activityId);
+        }
+
+        public async Task<bool> DeleteUserAllActivities(string IdentityUserId)
+        {
+            return await _activityRepository.DeleteUserAllActivities(IdentityUserId);   
+        }
         public async Task<List<GetActivityDTO>> GetAllActivities()
         {
             return _mapper.Map<List<GetActivityDTO>>(await _activityRepository.GetAllActivities());
@@ -53,24 +63,24 @@ namespace ToDoActivityAppAPI.Business.Activities
             return _mapper.Map<List<GetActivityDTO>>(await _activityRepository.GetAllUserActivities(IdentityUserId));
         }
 
-        public async Task<List<GetActivityDTO>> GetUserActiviesByButget(string IdentityUserId, double MinButget, double MaxButget)
+        public async Task<List<GetActivityDTO>> GetUserActivitiesByButget(string IdentityUserId, double minButget, double maxButget)
         {
-            return _mapper.Map<List<GetActivityDTO>>(await _activityRepository.GetUserActiviesByButget(IdentityUserId, MinButget, MaxButget));
+            return _mapper.Map<List<GetActivityDTO>>(await _activityRepository.GetUserActivitiesByButget(IdentityUserId, minButget, maxButget));
         }
 
-        public async Task<List<GetActivityDTO>> GetUserActiviesByNumberOfDays(string IdentityUserId, int MinDay, int MaxDay)
+        public async Task<List<GetActivityDTO>> GetUserActivitiesByNumberOfDays(string IdentityUserId, int MinDay, int MaxDay)
         {
-            return _mapper.Map<List<GetActivityDTO>>(await _activityRepository.GetUserActiviesByNumberOfDays(IdentityUserId, MinDay, MaxDay));
+            return _mapper.Map<List<GetActivityDTO>>(await _activityRepository.GetUserActivitiesByNumberOfDays(IdentityUserId, MinDay, MaxDay));
         }
 
-        public async Task<List<GetActivityDTO>> GetUserActiviesDone(string IdentityUserId)
+        public async Task<List<GetActivityDTO>> GetUserActivitiesDone(string IdentityUserId)
         {
-            return _mapper.Map<List<GetActivityDTO>>(await _activityRepository.GetUserActiviesDone(IdentityUserId));
+            return _mapper.Map<List<GetActivityDTO>>(await _activityRepository.GetUserActivitiesDone(IdentityUserId));
         }
 
-        public async Task<List<GetActivityDTO>> GetUserActiviesNotDone(string IdentityUserId)
+        public async Task<List<GetActivityDTO>> GetUserActivitiesNotDone(string IdentityUserId)
         {
-            return _mapper.Map<List<GetActivityDTO>>(await _activityRepository.GetUserActiviesNotDone(IdentityUserId));
+            return _mapper.Map<List<GetActivityDTO>>(await _activityRepository.GetUserActivitiesNotDone(IdentityUserId));
         }
 
         public async Task<GetActivityDTO> GetUserActivityById(string IdentityUserId, int id)
@@ -78,9 +88,9 @@ namespace ToDoActivityAppAPI.Business.Activities
             return _mapper.Map<GetActivityDTO>(await _activityRepository.GetUserActivityById(IdentityUserId, id));
         }
 
-        public async Task<GetActivityDTO> UpdateActivity(int activityId, string IdentityUserId, UpdateActivityDTO updateActivityDTO)
+        public async Task<bool> UpdateActivity(int activityId, string IdentityUserId, UpdateActivityDTO updateActivityDTO)
         {
-            return _mapper.Map<GetActivityDTO>(await _activityRepository.UpdateActivity(activityId, IdentityUserId, _mapper.Map<Activity>(updateActivityDTO)));
+            return await _activityRepository.UpdateActivity(activityId, IdentityUserId, _mapper.Map<Activity>(updateActivityDTO));
         }
     }
 }

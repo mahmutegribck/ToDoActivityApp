@@ -16,8 +16,6 @@ namespace ToDoActivityAppAPI.Entity.Entities
         public string Title { get; set; }
         public string? Text { get; set; }
         public DateTime CreateTime { get; set; }
-
-        [DefaultValue(null)]
         public DateTime? UpdateTime { get; set; }
         public DateTime? StartTime { get; set; }
         public DateTime? EndTime { get; set; }

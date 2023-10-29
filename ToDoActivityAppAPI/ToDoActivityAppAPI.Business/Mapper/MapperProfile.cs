@@ -39,6 +39,13 @@ namespace ToDoActivityAppAPI.Business.Mapper
             CreateMap<ApplicationUser, LoginDto>().ReverseMap();
             CreateMap<ApplicationUser, RegisterDto>().ReverseMap();
             CreateMap<ApplicationUser, ResetPasswordDto>().ReverseMap();
+
+
+            
+            CreateMap<DateTime, DateOnly>().ConvertUsing(dt => DateOnly.FromDateTime(dt));
+            //CreateMap<DateOnly, DateTime>().ConstructUsing(do => do.ToDateTime());
+            //CreateMap<DateOnly, DateTime>().ConvertUsing(do => do.ToDateTime());
+
         }
     }
 }

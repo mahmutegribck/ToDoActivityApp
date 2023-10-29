@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using ToDoActivityAppAPI.Entity.Entities;
@@ -17,231 +18,212 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
             _context = context;
         }
 
-        public async Task ActivityDone(string IdentityUserId, int id)
+
+
+        public async Task<bool> ActivityDone(string IdentityUserId, int id)
         {
-            var activityDone = await _context.Activities.FindAsync(id);
+            var activityDone = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == id).FirstOrDefaultAsync();
 
             if (activityDone != null)
             {
-                if (activityDone.ApplicationUserId == IdentityUserId)
-                {
-                    activityDone.Done = false;
-                    _context.Activities.Update(activityDone);
-                    await _context.SaveChangesAsync();
-                }
-                else
-                {
-                    throw new Exception("User is not change this activity");
-                }
+                activityDone.Done = true;
+                _context.Activities.Update(activityDone);
+                await _context.SaveChangesAsync();
+                return true;
             }
             else
             {
-                throw new Exception("Not Found Activity");
+                return false;
             }
         }
 
-        public async Task ActivityNotDone(string IdentityUserId, int id)
+
+        public async Task<bool> ActivityNotDone(string IdentityUserId, int id)
         {
-            var activityDone = await _context.Activities.FindAsync(id);
+            var activityDone = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == id).FirstOrDefaultAsync();
 
             if (activityDone != null)
             {
-                if (activityDone.ApplicationUserId == IdentityUserId)
-                {
-                    activityDone.Done = false;
-                    _context.Activities.Update(activityDone);
-                    await _context.SaveChangesAsync();
-                }
-                else
-                {
-                    throw new Exception("User is not change this activity");
-                }
+                activityDone.Done = false;
+                _context.Activities.Update(activityDone);
+                await _context.SaveChangesAsync();
+                return true;
             }
             else
             {
-                throw new Exception("Not Found Activity");
+                return false;
             }
         }
 
-        public async Task<Activity> CreateActivity(Activity activity)
+
+        public async Task<bool> CreateActivity(Activity activity)
         {
             if (activity != null)
             {
                 activity.CreateTime = DateTime.UtcNow;
+                activity.UpdateTime = null;
                 activity.DayNumbers = (activity.EndTime - activity.StartTime)?.Days;
                 await _context.Activities.AddAsync(activity);
                 await _context.SaveChangesAsync();
-                return activity;
+                return true;
             }
             else
             {
-                throw new Exception("Activity could not be created");
+                return false;
             }
-
         }
 
-        public async Task DeleteActivity(string IdentityUserId, int id)
+
+        public async Task<bool> DeleteUserActivityById(string IdentityUserId, int id)
         {
-            var deleteActivity = await _context.Activities.FindAsync(id);
+            var deleteActivity = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == id).FirstOrDefaultAsync();
 
             if (deleteActivity != null)
             {
-                if (deleteActivity.ApplicationUserId == IdentityUserId)
+                _context.Activities.Remove(deleteActivity);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        public async Task<bool> DeleteUserAllActivitiesById(string IdentityUserId, int[] id)
+        {
+            List<Activity> deleteActivities = new();
+
+            foreach (var activityId in id)
+            {
+                var deleteUserActivity = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == activityId).FirstOrDefaultAsync();
+                if (deleteUserActivity != null)
+                {
+                    deleteActivities.Add(deleteUserActivity);
+                }
+                //continue;
+            }
+
+            if (deleteActivities.Count > 0)
+            {
+                foreach (var deleteActivity in deleteActivities)
                 {
                     _context.Activities.Remove(deleteActivity);
                     await _context.SaveChangesAsync();
                 }
-                else
-                {
-                    throw new Exception("User is not delete this activity");
-                }
+                return true;
             }
             else
             {
-                throw new Exception("Not Found Activity");
+                return false;
             }
         }
+
+
+        public async Task<bool> DeleteUserAllActivities(string IdentityUserId)
+        {
+            var deleteUserActivity = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId).ToListAsync();
+
+            if (deleteUserActivity.Count > 0)
+            {
+                foreach (var deleteActivity in deleteUserActivity)
+                {
+                    _context.Activities.Remove(deleteActivity);
+                    await _context.SaveChangesAsync();
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
         public async Task<List<Activity>> GetAllActivities()
         {
             var activities = await _context.Activities.OrderByDescending(a => a.CreateTime).ToListAsync();
 
-            if (activities.Count > 0)
-            {
-                return activities;
-            }
-            else
-            {
-                throw new Exception("Not Found Activity");
-            }
+            return activities;
         }
+
 
         public async Task<List<Activity>> GetAllUserActivities(string IdentityUserId)
         {
             var userActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId).OrderByDescending(a => a.CreateTime).ToListAsync();
 
-            if (userActivities.Count > 0)
-            {
-                return userActivities;
-            }
-            else
-            {
-                throw new Exception("Not Found User Activity");
-            }
+            return userActivities;
         }
+
 
         public async Task<Activity> GetUserActivityById(string IdentityUserId, int id)
         {
-            var userActivity = await _context.Activities.FindAsync(id);
+            var userActivity = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == id).FirstOrDefaultAsync();
 
-            if (userActivity != null)
-            {
-                if (userActivity.ApplicationUserId == IdentityUserId)
-                {
-                    return userActivity;
-                }
-                else
-                {
-                    throw new Exception("Not Found User Activity");
-                }
-            }
-            else
-            {
-                throw new Exception("Not Found User Activity");
-            }
+            return userActivity;
 
         }
 
-        public async Task<Activity> UpdateActivity(int activityId, string IdentityUserId, Activity activity)
+
+        public async Task<bool> UpdateActivity(int activityId, string IdentityUserId, Activity activity)
         {
-            var activityUpdate = await _context.Activities.FindAsync(activityId);
+            var activityUpdate = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == activityId).FirstOrDefaultAsync();
 
             if (activityUpdate != null)
             {
-                if (activityUpdate.ApplicationUserId == IdentityUserId)
-                {
-                    activityUpdate.Title = activity.Title;
-                    activityUpdate.Text = activity.Text;
-                    activityUpdate.CreateTime = activityUpdate.CreateTime;
-                    activityUpdate.UpdateTime = DateTime.UtcNow;
-                    activityUpdate.StartTime = activity.StartTime;
-                    activityUpdate.EndTime = activity.EndTime;
-                    activityUpdate.DayNumbers = (activity.EndTime - activity.StartTime)?.Days;
-                    activityUpdate.Budget = activity.Budget;
-                    activityUpdate.Location = activity.Location;
-                    activityUpdate.Timed = activity.Timed;
+                activityUpdate.Title = activity.Title;
+                activityUpdate.Text = activity.Text;
+                activityUpdate.CreateTime = activityUpdate.CreateTime;
+                activityUpdate.UpdateTime = DateTime.UtcNow;
+                activityUpdate.StartTime = activity.StartTime;
+                activityUpdate.EndTime = activity.EndTime;
+                activityUpdate.DayNumbers = (activity.EndTime - activity.StartTime)?.Days;
+                activityUpdate.Budget = activity.Budget;
+                activityUpdate.Location = activity.Location;
+                activityUpdate.Timed = activity.Timed;
 
-                    _context.Activities.Update(activityUpdate);
-                    await _context.SaveChangesAsync();
-                    return activityUpdate;
-
-                }
-                else
-                {
-                    throw new Exception("User can not update this activity");
-                }
+                _context.Activities.Update(activityUpdate);
+                await _context.SaveChangesAsync();
+                return true;
             }
             else
             {
-                throw new Exception("Not Found Activity");
+                return false;
             }
         }
 
 
-        public async Task<List<Activity>> GetUserActiviesDone(string IdentityUserId)
+        public async Task<List<Activity>> GetUserActivitiesDone(string IdentityUserId)
         {
             var userDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Done == true).ToListAsync();
 
-            if (userDoneActivities.Count > 0)
-            {
-                return userDoneActivities;
-            }
-            else
-            {
-                throw new Exception("Not Found Activity");
-            }
+            return userDoneActivities;
         }
 
-        public async Task<List<Activity>> GetUserActiviesNotDone(string IdentityUserId)
+
+        public async Task<List<Activity>> GetUserActivitiesNotDone(string IdentityUserId)
         {
             var userNotDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Done == false).ToListAsync();
 
-            if (userNotDoneActivities.Count > 0)
-            {
-                return userNotDoneActivities;
-            }
-            else
-            {
-                throw new Exception("Not Found Activity");
-            }
+            return userNotDoneActivities;
         }
 
-        public async Task<List<Activity>> GetUserActiviesByNumberOfDays(string IdentityUserId, int MinDay, int MaxDay)
+
+        public async Task<List<Activity>> GetUserActivitiesByNumberOfDays(string IdentityUserId, int minDay, int maxDay)
         {
-            var activies = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.DayNumbers > MinDay && a.DayNumbers < MaxDay).ToListAsync();
+            var activies = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.DayNumbers >= minDay && a.DayNumbers <= maxDay).ToListAsync();
 
-            if (activies.Count > 0)
-            {
-                return activies;
-            }
-            else
-            {
-                throw new Exception("Not Found Activity");
-            }
+            return activies;
         }
 
-        public async Task<List<Activity>> GetUserActiviesByButget(string IdentityUserId, double MinButget, double MaxButget)
+
+        public async Task<List<Activity>> GetUserActivitiesByButget(string IdentityUserId, double minButget, double maxButget)
         {
-            var activies = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Budget > MinButget && a.Budget < MaxButget).ToListAsync();
+            var activies = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Budget > minButget && a.Budget < maxButget).ToListAsync();
 
-            if (activies.Count > 0)
-            {
-                return activies;
-            }
-            else
-            {
-                throw new Exception("Not Found Activity");
-            }
+            return activies;
         }
+
     }
 }

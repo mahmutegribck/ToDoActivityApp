@@ -12,14 +12,14 @@ namespace ToDoActivityAppAPI.Business.Activities.DTOs
     {
         public int ActivityId { get; set; }
         public string Title { get; set; }
-        public string Text { get; set; }
-        public DateTime CreateTime { get; set; }
-        public DateTime UpdateTime { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public int DayNumbers { get; set; }
-        public double Budget { get; set; }
-        public string Location { get; set; }
+        public string? Text { get; set; }
+        public DateOnly? CreateTime { get; set; }
+        public DateOnly? UpdateTime { get; set; }
+        public DateOnly? StartTime { get; set; }
+        public DateOnly? EndTime { get; set; }
+        public int? DayNumbers { get; set; }
+        public double? Budget { get; set; }
+        public string? Location { get; set; }
         public bool Timed { get; set; }
         public bool Done { get; set; }
     }

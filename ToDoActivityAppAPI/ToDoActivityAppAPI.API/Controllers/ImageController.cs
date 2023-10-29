@@ -31,7 +31,7 @@ namespace ToDoActivityAppAPI.API.Controllers
         [HttpPatch]
         [Route("[action]")]
         //Resim favorile
-        public async Task<IActionResult> ImageMakeFavorite(int[] imageID)
+        public async Task<IActionResult> ImageMakeFavorite([FromQuery] int[] imageID)
         {
             if (imageID == null)
                 return NotFound();
