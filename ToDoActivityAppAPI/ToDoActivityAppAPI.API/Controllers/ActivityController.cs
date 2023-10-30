@@ -13,7 +13,7 @@ namespace ToDoActivityAppAPI.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
+    [Authorize(Roles = "Admin,User")]
     public class ActivityController : ControllerBase
     {
         private readonly IActivityService _activityService;
@@ -126,6 +126,7 @@ namespace ToDoActivityAppAPI.API.Controllers
             return Unauthorized();
         }
 
+
         [HttpGet("[action]")]
         public async Task<IActionResult> GetAllActivities()
         {
@@ -163,10 +164,10 @@ namespace ToDoActivityAppAPI.API.Controllers
 
             if (currentUser != null)
             {
-                var userActivityByIdawait = _activityService.GetUserActivityById(currentUser.Id, activityId);
-                if (userActivityByIdawait != null)
+                var userActivityById = await _activityService.GetUserActivityById(currentUser.Id, activityId);
+                if (userActivityById != null)
                 {
-                    return Ok(userActivityByIdawait);
+                    return Ok(userActivityById);
                 }
                 return NotFound();
             }

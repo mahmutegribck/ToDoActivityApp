@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ToDoActivityAppAPI.Entity.Entities;
 
 namespace ToDoActivityAppAPI.Entity.Identity
 {
@@ -16,5 +17,9 @@ namespace ToDoActivityAppAPI.Entity.Identity
         public string? Location { get; set; }
 
         public DateTime? Birthdate { get; set; }
+
+        public ICollection<Activity> Activities { get; set; }
+
+
     }
 }

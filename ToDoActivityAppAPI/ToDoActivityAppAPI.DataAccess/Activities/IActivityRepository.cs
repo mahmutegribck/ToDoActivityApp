@@ -10,18 +10,18 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
     public interface IActivityRepository
     {
         Task<bool> CreateActivity(Activity activity);
-        Task<bool> UpdateActivity(int activityId, string IdentityUserId, Activity activity);
-        Task<bool> DeleteUserActivityById(string IdentityUserId, int id);
-        Task<bool> DeleteUserAllActivitiesById(string IdentityUserId, int[] id);
-        Task<bool> DeleteUserAllActivities(string IdentityUserId);
-        Task<bool> ActivityDone(string IdentityUserId, int id);
-        Task<bool> ActivityNotDone(string IdentityUserId, int id);
+        Task<bool> UpdateActivity(int activityId, string identityUserId, Activity activity);
+        Task<bool> DeleteUserActivityById(string identityUserId, int id);
+        Task<bool> DeleteUserAllActivitiesById(string identityUserId, int[] id);
+        Task<bool> DeleteUserAllActivities(string identityUserId);
+        Task<bool> ActivityDone(string identityUserId, int id);
+        Task<bool> ActivityNotDone(string identityUserId, int id);
         Task<List<Activity>> GetAllActivities();
-        Task<Activity> GetUserActivityById(string IdentityUserId, int id);
-        Task<List<Activity>> GetAllUserActivities(string IdentityUserId);
-        Task<List<Activity>> GetUserActivitiesDone(string IdentityUserId);
-        Task<List<Activity>> GetUserActivitiesNotDone(string IdentityUserId);
-        Task<List<Activity>> GetUserActivitiesByNumberOfDays(string IdentityUserId, int MinDay, int MaxDay);
-        Task<List<Activity>> GetUserActivitiesByButget(string IdentityUserId, double MinButget, double MaxButget);
+        Task<Activity> GetUserActivityById(string identityUserId, int id);
+        Task<List<Activity>> GetAllUserActivities(string identityUserId);
+        Task<List<Activity>> GetUserActivitiesDone(string identityUserId);
+        Task<List<Activity>> GetUserActivitiesNotDone(string identityUserId);
+        Task<List<Activity>> GetUserActivitiesByNumberOfDays(string identityUserId, int MinDay, int MaxDay);
+        Task<List<Activity>> GetUserActivitiesByButget(string identityUserId, double MinButget, double MaxButget);
     }
 }

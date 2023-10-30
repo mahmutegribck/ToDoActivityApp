@@ -54,7 +54,7 @@ namespace ToDoActivityAppAPI.API.Controllers
 
         [HttpPost("ResetPassword")]
         [Authorize(Roles = "Admin,User")]
-        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDto model)
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto model)
         {
             if (ModelState.IsValid)
             {

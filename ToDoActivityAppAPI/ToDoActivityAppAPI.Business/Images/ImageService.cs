@@ -47,6 +47,7 @@ namespace ToDoActivityAppAPI.Business.Images
                     };
 
                     await _imageRepository.AddImage(image);
+                    continue;
                 }
             }
 
@@ -81,6 +82,31 @@ namespace ToDoActivityAppAPI.Business.Images
         public async Task ImageMakeFavorite(int[] imageID)
         {
             await _imageRepository.ImageMakeFavorite(imageID);
+        }
+
+        public async Task ImageMakeNotFavorite(int[] imageID)
+        {
+            await _imageRepository.ImageMakeNotFavorite(imageID);
+        }
+
+        public async Task<List<GetImageDTO>> GetUserActivityAllImages(int activityId, string identityUserId)
+        {
+            return _mapper.Map<List<GetImageDTO>>(await _imageRepository.GetUserActivityAllImages(activityId, identityUserId));
+        }
+
+        public async Task<List<GetImageDTO>> GetUserActivityAllFavoriteImages(int activityId, string identityUserId)
+        {
+            return _mapper.Map<List<GetImageDTO>>(await _imageRepository.GetUserActivityAllFavoriteImages(activityId, identityUserId));
+        }
+
+        public async Task<List<GetImageDTO>> GetUserAllImages(string identityUserId)
+        {
+            return _mapper.Map<List<GetImageDTO>>(await _imageRepository.GetUserAllImages(identityUserId));
+        }
+
+        public async Task<List<GetImageDTO>> GetUserAllFavoriteImages(string identityUserId)
+        {
+            return _mapper.Map<List<GetImageDTO>>(await _imageRepository.GetUserAllFavoriteImages(identityUserId));
         }
     }
 }

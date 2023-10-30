@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ToDoActivityAppAPI.DataAccess;
 
@@ -12,11 +11,9 @@ using ToDoActivityAppAPI.DataAccess;
 namespace ToDoActivityAppAPI.DataAccess.Migrations
 {
     [DbContext(typeof(ToDoActivityAppAPIDbContext))]
-    [Migration("20231002123913_mig_01")]
-    partial class mig_01
+    partial class ToDoActivityAppAPIDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,6 +107,13 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "b74ddd14-6340-4840-95c2-db12554843e5",
+                            RoleId = "fab4fac1-c546-41de-aebc-a14da6895711"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -143,30 +147,28 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("Budget")
+                    b.Property<double?>("Budget")
                         .HasColumnType("float");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DayNumbers")
+                    b.Property<int?>("DayNumbers")
                         .HasColumnType("int");
 
                     b.Property<bool>("Done")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime?>("StartTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Timed")
@@ -175,6 +177,9 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ActivityId");
 
@@ -246,11 +251,11 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
 
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Image", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ImageId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"));
 
                     b.Property<int>("ActivityId")
                         .HasColumnType("int");
@@ -267,7 +272,13 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
 
-                    b.HasKey("Id");
+                    b.Property<bool>("IsFavorite")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ImageId");
 
                     b.HasIndex("ActivityId");
 
@@ -299,6 +310,22 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "fab4fac1-c546-41de-aebc-a14da6895711",
+                            ConcurrencyStamp = "1",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "c7b013f0-5201-4317-abd8-c211f91b7330",
+                            ConcurrencyStamp = "2",
+                            Name = "User",
+                            NormalizedName = "User"
+                        });
                 });
 
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Identity.ApplicationUser", b =>
@@ -308,6 +335,9 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("Birthdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -321,7 +351,6 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
@@ -376,6 +405,26 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "b74ddd14-6340-4840-95c2-db12554843e5",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3feaaa9b-c9b4-4cd8-81f7-86beec6e578b",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            Name = "Admin",
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEOy+dhxyh6iKyCLbgYbRMiqWD0VLOaRg4Fien5XD6KEbqY2Awk97+wYbgCLjmmz3g==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "cb682a06-6d48-4b6a-865d-6befd0835c9f",
+                            Surname = "Admin",
+                            TwoFactorEnabled = false,
+                            UserName = "Admin"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -432,7 +481,7 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Activity", b =>
                 {
                     b.HasOne("ToDoActivityAppAPI.Entity.Identity.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Activities")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -465,6 +514,11 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Activity", b =>
                 {
                     b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("ToDoActivityAppAPI.Entity.Identity.ApplicationUser", b =>
+                {
+                    b.Navigation("Activities");
                 });
 #pragma warning restore 612, 618
         }

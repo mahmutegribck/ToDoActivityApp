@@ -12,8 +12,8 @@ using ToDoActivityAppAPI.DataAccess;
 namespace ToDoActivityAppAPI.DataAccess.Migrations
 {
     [DbContext(typeof(ToDoActivityAppAPIDbContext))]
-    [Migration("20231027115116_mig_12")]
-    partial class mig_12
+    [Migration("20231029090851_mig_005")]
+    partial class mig_005
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -165,6 +165,9 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("ImagesId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
@@ -180,6 +183,9 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ActivityId");
 
@@ -260,6 +266,10 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.Property<int>("ActivityId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("ContentType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -276,12 +286,13 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ActivityId");
+
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Images");
                 });
@@ -412,16 +423,16 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ebafb324-3bb4-479a-bd18-b4f73178812b",
+                            ConcurrencyStamp = "6ed42acf-b36f-4bb5-ad4d-4dcc60509b55",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKxD9qEmNdf1L/nhPgBYclhysAxDYjNNm71WyLk1KhzlbUpd6GZf2MYQSM4PlqOixw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAED3DZmKqZgR0Ea6oNhkrZmXrYVbQjGmnYZJ8ddV3FYe/qg0yVPoVWG0bbdJTzslUFA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1bebc3f8-9f9b-448d-8a35-ee38942075a5",
+                            SecurityStamp = "aca8ddf3-07fc-4372-bbde-7e4e4d3bbc16",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
@@ -482,7 +493,7 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Activity", b =>
                 {
                     b.HasOne("ToDoActivityAppAPI.Entity.Identity.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Activities")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -509,11 +520,26 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ToDoActivityAppAPI.Entity.Identity.ApplicationUser", "ApplicationUser")
+                        .WithMany("Images")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Activity");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Activity", b =>
                 {
+                    b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("ToDoActivityAppAPI.Entity.Identity.ApplicationUser", b =>
+                {
+                    b.Navigation("Activities");
+
                     b.Navigation("Images");
                 });
 #pragma warning restore 612, 618

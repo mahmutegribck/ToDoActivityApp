@@ -14,6 +14,11 @@ namespace ToDoActivityAppAPI.DataAccess.Images
         Task DeleteAllActivityImages(int activityId);
         Task DeleteActivityImages(int[] imageID, int activityId);
         Task ImageMakeFavorite(int[] imageID);
+        Task ImageMakeNotFavorite(int[] imageID);
         Task<List<Image>> GetActivityImagesById(int activityId);
+        Task<List<Image>> GetUserActivityAllImages(int activityId, string identityUserId);
+        Task<List<Image>> GetUserActivityAllFavoriteImages(int activityId, string identityUserId);
+        Task<List<Image>> GetUserAllImages(string identityUserId);
+        Task<List<Image>> GetUserAllFavoriteImages(string identityUserId);
     }
 }

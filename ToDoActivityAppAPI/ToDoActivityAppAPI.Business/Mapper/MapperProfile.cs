@@ -10,6 +10,7 @@ using ToDoActivityAppAPI.Business.Auth.DTOs;
 using ToDoActivityAppAPI.Business.ContactReplies.DTOs;
 using ToDoActivityAppAPI.Business.Contacts.DTOs;
 using ToDoActivityAppAPI.Business.Images.DTOs;
+using ToDoActivityAppAPI.Business.Users.DTOs;
 using ToDoActivityAppAPI.Entity.Entities;
 using ToDoActivityAppAPI.Entity.Identity;
 using Activity = ToDoActivityAppAPI.Entity.Entities.Activity;
@@ -39,9 +40,10 @@ namespace ToDoActivityAppAPI.Business.Mapper
             CreateMap<ApplicationUser, LoginDto>().ReverseMap();
             CreateMap<ApplicationUser, RegisterDto>().ReverseMap();
             CreateMap<ApplicationUser, ResetPasswordDto>().ReverseMap();
+            CreateMap<ApplicationUser, GetApplicationUserDto>().ReverseMap();
+            CreateMap<ApplicationUser, UpdateApplicationUserDto>().ReverseMap();
 
 
-            
             CreateMap<DateTime, DateOnly>().ConvertUsing(dt => DateOnly.FromDateTime(dt));
             //CreateMap<DateOnly, DateTime>().ConstructUsing(do => do.ToDateTime());
             //CreateMap<DateOnly, DateTime>().ConvertUsing(do => do.ToDateTime());

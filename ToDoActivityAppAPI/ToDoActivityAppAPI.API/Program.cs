@@ -10,11 +10,13 @@ using ToDoActivityAppAPI.Business.ContactReplies;
 using ToDoActivityAppAPI.Business.Contacts;
 using ToDoActivityAppAPI.Business.Images;
 using ToDoActivityAppAPI.Business.Jwt;
+using ToDoActivityAppAPI.Business.Users;
 using ToDoActivityAppAPI.DataAccess;
 using ToDoActivityAppAPI.DataAccess.Activities;
 using ToDoActivityAppAPI.DataAccess.ContactReplies;
 using ToDoActivityAppAPI.DataAccess.Contacts;
 using ToDoActivityAppAPI.DataAccess.Images;
+using ToDoActivityAppAPI.DataAccess.Users;
 using ToDoActivityAppAPI.Entity.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -75,6 +77,10 @@ builder.Services.AddScoped<IJwtService, JwtService>();
 
 builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
+
+builder.Services.AddScoped<IUserRepository,  UserRepository>(); 
+builder.Services.AddScoped<IUserService,  UserService>();   
+
 
 
 builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>

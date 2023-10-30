@@ -48,7 +48,7 @@ namespace ToDoActivityAppAPI.DataAccess.Images
 
             foreach (var image in images)
             {
-                if (imageID.Contains(image.Id))
+                if (imageID.Contains(image.ImageId))
                 {
                     _context.Images.Remove(image);
                 }
@@ -74,6 +74,42 @@ namespace ToDoActivityAppAPI.DataAccess.Images
                 _context.Images.Update(image);
             }
             await _context.SaveChangesAsync();
+        }
+
+        public async Task ImageMakeNotFavorite(int[] imageID)
+        {
+            foreach (var imageid in imageID)
+            {
+                var image = await _context.Images.FindAsync(imageid);
+                image.IsFavorite = false;
+                _context.Images.Update(image);
+            }
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<Image>> GetUserActivityAllImages(int activityId, string identityUserId)
+        {
+            var userAllActivityImages = await _context.Images.Where(i => i.ActivityId == activityId).ToListAsync();
+            return userAllActivityImages;
+        }
+
+        public async Task<List<Image>> GetUserActivityAllFavoriteImages(int activityId, string identityUserId)
+        {
+            var userAllFavoriteActivityImages = await _context.Images.Where(i => i.ActivityId == activityId && i.IsFavorite == true).ToListAsync();
+
+            return userAllFavoriteActivityImages;
+        }
+
+        public async Task<List<Image>> GetUserAllImages(string identityUserId)
+        {
+            var userAllImages = await _context.Images.Where(i => i.Activity.ApplicationUserId == identityUserId).ToListAsync();
+            return userAllImages;
+        }
+
+        public async Task<List<Image>> GetUserAllFavoriteImages(string identityUserId)
+        {
+            var userAllFavoriteImages = await _context.Images.Where(i => i.Activity.ApplicationUserId == identityUserId && i.IsFavorite == true).ToListAsync();
+            return userAllFavoriteImages;
         }
     }
 }

@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20231027204925_mig_13.cs" />
+    <Compile Remove="Migrations\20231027204925_mig_13.Designer.cs" />
+    <Compile Remove="Migrations\20231029085630_mig_004.cs" />
+    <Compile Remove="Migrations\20231029085630_mig_004.Designer.cs" />
+    <Compile Remove="Migrations\20231029090851_mig_005.cs" />
+    <Compile Remove="Migrations\20231029090851_mig_005.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />

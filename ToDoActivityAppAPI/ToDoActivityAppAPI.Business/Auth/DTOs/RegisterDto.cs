@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,12 @@ namespace ToDoActivityAppAPI.Business.Auth.DTOs
 
         [Required]
         public string ConfirmPassword { get; set; }
+
+        [DefaultValue("")]
+        public string? Location { get; set; }
+
+        [DefaultValue(null)]
+        public DateTime? Birthdate { get; set; }
 
     }
 }

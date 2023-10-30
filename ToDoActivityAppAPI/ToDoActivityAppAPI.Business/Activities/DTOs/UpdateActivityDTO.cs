@@ -22,7 +22,6 @@ namespace ToDoActivityAppAPI.Business.Activities.DTOs
         [DefaultValue(null)]
         public DateTime? EndTime { get; set; }
 
-        [DefaultValue("")]
         public double? Budget { get; set; }
 
         [DefaultValue("")]

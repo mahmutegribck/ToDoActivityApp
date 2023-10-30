@@ -12,8 +12,8 @@ using ToDoActivityAppAPI.DataAccess;
 namespace ToDoActivityAppAPI.DataAccess.Migrations
 {
     [DbContext(typeof(ToDoActivityAppAPIDbContext))]
-    [Migration("20231027114041_mig_10")]
-    partial class mig_10
+    [Migration("20231029150621_mig_01")]
+    partial class mig_01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,30 +150,28 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<double>("Budget")
+                    b.Property<double?>("Budget")
                         .HasColumnType("float");
 
                     b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DayNumbers")
+                    b.Property<int?>("DayNumbers")
                         .HasColumnType("int");
 
                     b.Property<bool>("Done")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("EndTime")
+                    b.Property<DateTime?>("EndTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("StartTime")
+                    b.Property<DateTime?>("StartTime")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Timed")
@@ -182,6 +180,9 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdateTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ActivityId");
 
@@ -253,11 +254,11 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
 
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Image", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ImageId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ImageId"));
 
                     b.Property<int>("ActivityId")
                         .HasColumnType("int");
@@ -278,10 +279,9 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Text")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ImageId");
 
                     b.HasIndex("ActivityId");
 
@@ -339,7 +339,7 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Birthdate")
+                    b.Property<DateTime?>("Birthdate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -414,18 +414,16 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            Birthdate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ConcurrencyStamp = "89103445-90e2-4e2d-a29f-236dd1dfcb17",
+                            ConcurrencyStamp = "3feaaa9b-c9b4-4cd8-81f7-86beec6e578b",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
-                            Location = "",
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKAStx+KEEF9jfz7BvLfe2ksKhtDFGskyMKx3yj0yqnNI6ucSdOSXr5DMeMqdorKKw==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEEOy+dhxyh6iKyCLbgYbRMiqWD0VLOaRg4Fien5XD6KEbqY2Awk97+wYbgCLjmmz3g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "84be3d9a-9b23-4513-ada6-3b4fa66b4555",
+                            SecurityStamp = "cb682a06-6d48-4b6a-865d-6befd0835c9f",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
@@ -486,7 +484,7 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Activity", b =>
                 {
                     b.HasOne("ToDoActivityAppAPI.Entity.Identity.ApplicationUser", "ApplicationUser")
-                        .WithMany()
+                        .WithMany("Activities")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -519,6 +517,11 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Activity", b =>
                 {
                     b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("ToDoActivityAppAPI.Entity.Identity.ApplicationUser", b =>
+                {
+                    b.Navigation("Activities");
                 });
 #pragma warning restore 612, 618
         }

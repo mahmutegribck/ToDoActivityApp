@@ -20,9 +20,9 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
 
 
 
-        public async Task<bool> ActivityDone(string IdentityUserId, int id)
+        public async Task<bool> ActivityDone(string identityUserId, int id)
         {
-            var activityDone = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == id).FirstOrDefaultAsync();
+            var activityDone = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId && a.ActivityId == id).OrderByDescending(a => a.CreateTime).FirstOrDefaultAsync();
 
             if (activityDone != null)
             {
@@ -38,9 +38,9 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         }
 
 
-        public async Task<bool> ActivityNotDone(string IdentityUserId, int id)
+        public async Task<bool> ActivityNotDone(string identityUserId, int id)
         {
-            var activityDone = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == id).FirstOrDefaultAsync();
+            var activityDone = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId && a.ActivityId == id).OrderByDescending(a => a.CreateTime).FirstOrDefaultAsync();
 
             if (activityDone != null)
             {
@@ -74,10 +74,10 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         }
 
 
-        public async Task<bool> DeleteUserActivityById(string IdentityUserId, int id)
+        public async Task<bool> DeleteUserActivityById(string identityUserId, int id)
         {
-            var deleteActivity = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == id).FirstOrDefaultAsync();
-
+            var deleteActivity = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId && a.ActivityId == id).FirstOrDefaultAsync();
+            //var del = await _context.Activities.Include(x => x.Images)
             if (deleteActivity != null)
             {
                 _context.Activities.Remove(deleteActivity);
@@ -91,13 +91,13 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         }
 
 
-        public async Task<bool> DeleteUserAllActivitiesById(string IdentityUserId, int[] id)
+        public async Task<bool> DeleteUserAllActivitiesById(string identityUserId, int[] id)
         {
             List<Activity> deleteActivities = new();
 
             foreach (var activityId in id)
             {
-                var deleteUserActivity = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == activityId).FirstOrDefaultAsync();
+                var deleteUserActivity = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId && a.ActivityId == activityId).FirstOrDefaultAsync();
                 if (deleteUserActivity != null)
                 {
                     deleteActivities.Add(deleteUserActivity);
@@ -121,9 +121,9 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         }
 
 
-        public async Task<bool> DeleteUserAllActivities(string IdentityUserId)
+        public async Task<bool> DeleteUserAllActivities(string identityUserId)
         {
-            var deleteUserActivity = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId).ToListAsync();
+            var deleteUserActivity = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId).ToListAsync();
 
             if (deleteUserActivity.Count > 0)
             {
@@ -149,26 +149,26 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         }
 
 
-        public async Task<List<Activity>> GetAllUserActivities(string IdentityUserId)
+        public async Task<List<Activity>> GetAllUserActivities(string identityUserId)
         {
-            var userActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId).OrderByDescending(a => a.CreateTime).ToListAsync();
+            var userActivities = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId).OrderByDescending(a => a.CreateTime).ToListAsync();
 
             return userActivities;
         }
 
 
-        public async Task<Activity> GetUserActivityById(string IdentityUserId, int id)
+        public async Task<Activity> GetUserActivityById(string identityUserId, int id)
         {
-            var userActivity = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == id).FirstOrDefaultAsync();
+            var userActivity = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId && a.ActivityId == id).FirstOrDefaultAsync();
 
             return userActivity;
 
         }
 
 
-        public async Task<bool> UpdateActivity(int activityId, string IdentityUserId, Activity activity)
+        public async Task<bool> UpdateActivity(int activityId, string identityUserId, Activity activity)
         {
-            var activityUpdate = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.ActivityId == activityId).FirstOrDefaultAsync();
+            var activityUpdate = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId && a.ActivityId == activityId).FirstOrDefaultAsync();
 
             if (activityUpdate != null)
             {
@@ -194,33 +194,33 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
         }
 
 
-        public async Task<List<Activity>> GetUserActivitiesDone(string IdentityUserId)
+        public async Task<List<Activity>> GetUserActivitiesDone(string identityUserId)
         {
-            var userDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Done == true).ToListAsync();
+            var userDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId && a.Done == true).ToListAsync();
 
             return userDoneActivities;
         }
 
 
-        public async Task<List<Activity>> GetUserActivitiesNotDone(string IdentityUserId)
+        public async Task<List<Activity>> GetUserActivitiesNotDone(string identityUserId)
         {
-            var userNotDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Done == false).ToListAsync();
+            var userNotDoneActivities = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId && a.Done == false).ToListAsync();
 
             return userNotDoneActivities;
         }
 
 
-        public async Task<List<Activity>> GetUserActivitiesByNumberOfDays(string IdentityUserId, int minDay, int maxDay)
+        public async Task<List<Activity>> GetUserActivitiesByNumberOfDays(string identityUserId, int minDay, int maxDay)
         {
-            var activies = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.DayNumbers >= minDay && a.DayNumbers <= maxDay).ToListAsync();
+            var activies = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId && a.DayNumbers >= minDay && a.DayNumbers <= maxDay).ToListAsync();
 
             return activies;
         }
 
 
-        public async Task<List<Activity>> GetUserActivitiesByButget(string IdentityUserId, double minButget, double maxButget)
+        public async Task<List<Activity>> GetUserActivitiesByButget(string identityUserId, double minButget, double maxButget)
         {
-            var activies = await _context.Activities.Where(a => a.ApplicationUserId == IdentityUserId && a.Budget > minButget && a.Budget < maxButget).ToListAsync();
+            var activies = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId && a.Budget >= minButget && a.Budget <= maxButget).ToListAsync();
 
             return activies;
         }

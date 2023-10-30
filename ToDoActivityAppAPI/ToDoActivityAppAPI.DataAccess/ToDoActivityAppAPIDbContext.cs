@@ -26,12 +26,22 @@ namespace ToDoActivityAppAPI.DataAccess
 
         public DbSet<Image> Images { get; set; }
 
+        public DbSet<AdminActivity> AdminActivities { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
             this.SeedUsers(builder);
             this.SeedRoles(builder);
             this.SeedUserRoles(builder);
+
+            //builder.Entity<Activity>().HasOne(u => u.ApplicationUser).WithMany(a => a.Activities).HasForeignKey(u => u.ApplicationUserId).OnDelete(DeleteBehavior.Cascade);
+
+            //builder.Entity<Image>().HasOne(u => u.Activity).WithMany(a => a.Images).OnDelete(DeleteBehavior.NoAction);
+            //builder.Entity<Activity>().HasMany(a => a.Images).WithOne(i => i.Activity).HasForeignKey(i => i.ActivityId).OnDelete(DeleteBehavior.Cascade);
+            //builder.Entity<Activity>().HasOne(a => a.ApplicationUser).WithMany(u => u.Activities).HasForeignKey(a => a.ApplicationUserId);
+
+            //builder.Entity<Image>().HasOne(i => i.ApplicationUser).WithMany(u => u.Images).HasForeignKey(i => i.ApplicationUserId);
         }
 
         private void SeedUsers(ModelBuilder builder)
