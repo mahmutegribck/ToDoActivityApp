@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoActivityAppAPI.Entity", "ToDoActivityAppAPI.Entity\ToDoActivityAppAPI.Entity.csproj", "{83BF3425-7A19-4033-A41C-A542CCB081F0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoActivityAppAPI.DataAccess", "ToDoActivityAppAPI.DataAccess\ToDoActivityAppAPI.DataAccess.csproj", "{B431CC52-FEE1-46D5-AD34-56112A6BB925}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoActivityAppAPI.API", "ToDoActivityAppAPI.API\ToDoActivityAppAPI.API.csproj", "{BCF47D17-D8F4-4943-8F3D-1C664B612D13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoActivityAppAPI.Business", "ToDoActivityAppAPI.Business\ToDoActivityAppAPI.Business.csproj", "{95CC76D2-0E90-496F-9682-DB1312CF3CD4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83BF3425-7A19-4033-A41C-A542CCB081F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83BF3425-7A19-4033-A41C-A542CCB081F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83BF3425-7A19-4033-A41C-A542CCB081F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83BF3425-7A19-4033-A41C-A542CCB081F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B431CC52-FEE1-46D5-AD34-56112A6BB925}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B431CC52-FEE1-46D5-AD34-56112A6BB925}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B431CC52-FEE1-46D5-AD34-56112A6BB925}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B431CC52-FEE1-46D5-AD34-56112A6BB925}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCF47D17-D8F4-4943-8F3D-1C664B612D13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCF47D17-D8F4-4943-8F3D-1C664B612D13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCF47D17-D8F4-4943-8F3D-1C664B612D13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCF47D17-D8F4-4943-8F3D-1C664B612D13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95CC76D2-0E90-496F-9682-DB1312CF3CD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95CC76D2-0E90-496F-9682-DB1312CF3CD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95CC76D2-0E90-496F-9682-DB1312CF3CD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95CC76D2-0E90-496F-9682-DB1312CF3CD4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D2B4DBA7-ECC9-4F3C-8EDD-93C3FECF2C1F}
+	EndGlobalSection
+EndGlobal
