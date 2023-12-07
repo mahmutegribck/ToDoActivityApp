@@ -11,5 +11,7 @@ namespace ToDoActivityAppAPI.Business.Jwt
     public interface IJwtService
     {
         Task<JwtTokenDTO> CreateJwtToken(ApplicationUser user);
+        Task<string> GenerateRefreshToken(ApplicationUser user, DateTime accessTokenTime);
+        Task<JwtTokenDTO?> GenerateRefreshTokenWithJwtToken(string refreshToken);
     }
 }

@@ -188,6 +188,39 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.ToTable("Activities");
                 });
 
+            modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.AdminActivity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ImageURL")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("AdminActivities");
+                });
+
             modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.Contact", b =>
                 {
                     b.Property<int>("ContactId")
@@ -380,6 +413,12 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RefreshTokenEndDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -411,16 +450,16 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3feaaa9b-c9b4-4cd8-81f7-86beec6e578b",
+                            ConcurrencyStamp = "1dac14a5-f937-474c-accc-3a6d86769828",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEOy+dhxyh6iKyCLbgYbRMiqWD0VLOaRg4Fien5XD6KEbqY2Awk97+wYbgCLjmmz3g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAECFr5uyfItRYI1HUJaVhRflsTGl/gSqa9+AehckVZqep1QNk6l+qA4JlsB/qT3d7hw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "cb682a06-6d48-4b6a-865d-6befd0835c9f",
+                            SecurityStamp = "7b3aa911-1bb3-4a40-8e75-daad58728424",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
@@ -482,6 +521,17 @@ namespace ToDoActivityAppAPI.DataAccess.Migrations
                 {
                     b.HasOne("ToDoActivityAppAPI.Entity.Identity.ApplicationUser", "ApplicationUser")
                         .WithMany("Activities")
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ApplicationUser");
+                });
+
+            modelBuilder.Entity("ToDoActivityAppAPI.Entity.Entities.AdminActivity", b =>
+                {
+                    b.HasOne("ToDoActivityAppAPI.Entity.Identity.ApplicationUser", "ApplicationUser")
+                        .WithMany()
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

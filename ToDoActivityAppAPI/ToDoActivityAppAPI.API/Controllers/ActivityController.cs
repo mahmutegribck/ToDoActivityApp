@@ -13,7 +13,7 @@ namespace ToDoActivityAppAPI.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin,User")]
+    [Authorize]
     public class ActivityController : ControllerBase
     {
         private readonly IActivityService _activityService;

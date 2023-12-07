@@ -19,7 +19,7 @@ namespace ToDoActivityAppAPI.API.Controllers
 
         }
 
-        [HttpPost("Register")]
+        [HttpPost("[action]")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterDto model)
         {
             if (ModelState.IsValid)
@@ -34,7 +34,7 @@ namespace ToDoActivityAppAPI.API.Controllers
             return BadRequest(ErrorMsg.InvalidProperties);
         }
 
-        [HttpPost("Login")]
+        [HttpPost("[action]")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginDto model)
         {
             if (ModelState.IsValid)
@@ -52,7 +52,19 @@ namespace ToDoActivityAppAPI.API.Controllers
 
         }
 
-        [HttpPost("ResetPassword")]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> LoginWithRefreshToken([FromBody] string refreshToken)
+        {
+            var tokens = await _authService.LoginWithRefreshToken(refreshToken);
+            if (tokens != null)
+            {
+                return Ok(tokens);
+            }
+           return Unauthorized();
+
+        }
+
+        [HttpPost("[action]")]
         [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordDto model)
         {
