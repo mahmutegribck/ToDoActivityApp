@@ -8,6 +8,9 @@ namespace ToDoActivityAppAPI.Business.Jwt.DTOs
 {
     public class JwtTokenDTO
     {
-        public string AccessToken { get; set; } 
+        public string AccessToken { get; set; }
+        public DateTime AccessTokenTime { get; set; }
+        public string RefreshToken { get; set; }
+
     }
 }

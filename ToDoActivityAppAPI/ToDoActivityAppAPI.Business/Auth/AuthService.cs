@@ -67,6 +67,11 @@ namespace ToDoActivityAppAPI.Business.Auth
             }
         }
 
+        public async Task<JwtTokenDTO?> LoginWithRefreshToken(string refreshToken)
+        {
+            return await _jwtService.GenerateRefreshTokenWithJwtToken(refreshToken);
+        }
+
         public async Task<RegisterResponse> RegisterUserAsync(RegisterDto model)
         {
             try

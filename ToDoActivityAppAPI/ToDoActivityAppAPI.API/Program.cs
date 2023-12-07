@@ -93,7 +93,14 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
     options.User.RequireUniqueEmail = false;
     options.Lockout.AllowedForNewUsers = false;
     options.User.AllowedUserNameCharacters = "abcçdefgðhiýjklmnoöpqrsþtuüvwxyzABCÇDEFGÐHIÝJKLMNOÖPQRSÞTUÜVWXYZ0123456789 ";
+
 }).AddEntityFrameworkStores<ToDoActivityAppAPIDbContext>().AddDefaultTokenProviders();
+
+//builder.Services.AddSession(options =>
+//{
+//    //options.IdleTimeout = TimeSpan.FromMinutes(60);//60 DK SONRA OTURUM KAPA
+//});
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -105,22 +112,25 @@ builder.Services.AddAuthentication(options =>
 
             .AddJwtBearer(options =>
             {
-                //options.SaveToken = true;
-                //options.RequireHttpsMetadata = false;
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidateLifetime = false,
+                    ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
+                    //RequireExpirationTime = true,
 
                     ValidAudience = builder.Configuration["Jwt:Audience"],
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
                     
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"] ?? string.Empty )),
-                    //LifetimeValidator = (notBefore, expires, securityToken, validationParameters) => expires != null ? expires > DateTime.UtcNow : false
+                    LifetimeValidator = (notBefore, expires, securityToken, validationParameters) => expires != null ? expires > DateTime.UtcNow : false
                 };
             });
+
+
 
 var connectionString = builder.Configuration.GetConnectionString("IdentityConnection");
 builder.Services.AddDbContext<ToDoActivityAppAPIDbContext>(options => options.UseSqlServer(connectionString));
@@ -136,6 +146,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 app.UseHttpsRedirection();
+
 
 app.UseAuthentication();
 app.UseAuthorization();

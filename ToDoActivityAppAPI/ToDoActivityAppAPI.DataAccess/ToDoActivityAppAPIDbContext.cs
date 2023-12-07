@@ -57,6 +57,7 @@ namespace ToDoActivityAppAPI.DataAccess
                 NormalizedEmail = "ADMIN@GMAIL.COM",
                 NormalizedUserName = "ADMIN",
                 SecurityStamp = Guid.NewGuid().ToString()
+                
 
 
             };

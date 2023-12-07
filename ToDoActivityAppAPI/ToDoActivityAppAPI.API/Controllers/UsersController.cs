@@ -97,7 +97,7 @@ namespace ToDoActivityAppAPI.API.Controllers
 
         [HttpDelete]
         [Route("[action]")]
-        [Authorize(Roles = "Admin,User")]
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> DeleteUser()
         {
             var currentUser = await _userManager.GetUserAsync(User);

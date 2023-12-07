@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using ToDoActivityAppAPI.Business.Jwt.DTOs;
@@ -26,35 +29,60 @@ namespace ToDoActivityAppAPI.Business.Jwt
 
         public async Task<JwtTokenDTO> CreateJwtToken(ApplicationUser user)
         {
-            JwtTokenDTO jwtTokenDTO = new JwtTokenDTO();
+            var jwttoken = new JwtTokenDTO();
+            var tokenhandler = new JwtSecurityTokenHandler();
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"] ?? string.Empty));
-            SigningCredentials signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var roles = await _userManager.GetRolesAsync(user);
-            var roleClaims = new List<Claim>();
-            for (int i = 0; i < roles.Count; i++)
+            jwttoken.AccessTokenTime = DateTime.UtcNow.AddHours(1);
+            var tokendesc = new SecurityTokenDescriptor
             {
-                roleClaims.Add(new Claim("roles", roles[i]));
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                        new Claim(ClaimTypes.Name,user.Name),
+                        //new Claim(ClaimTypes.Role,user.)
+                }),
+                Audience= _configuration["Jwt:Audience"],
+                Issuer= _configuration["Jwt:Issuer"],
+                Expires = jwttoken.AccessTokenTime,
+                SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+            };
+            var token = tokenhandler.CreateToken(tokendesc);
+            var finaltoken = tokenhandler.WriteToken(token);
+
+
+            return new JwtTokenDTO() { AccessToken = finaltoken, AccessTokenTime = jwttoken.AccessTokenTime, RefreshToken = await GenerateRefreshToken(user, jwttoken.AccessTokenTime) };
+
+
+
+        }
+
+        public async Task<string> GenerateRefreshToken(ApplicationUser user, DateTime accessTokenTime)
+        {
+            var randomnumber = new byte[32];
+            using RandomNumberGenerator randomnumbergenerator = RandomNumberGenerator.Create();
+
+            randomnumbergenerator.GetBytes(randomnumber);
+            string refreshtoken = Convert.ToBase64String(randomnumber);
+
+            user.RefreshToken = refreshtoken;
+            user.RefreshTokenEndDate = accessTokenTime.AddHours(1);
+            await _userManager.UpdateAsync(user);
+
+            return refreshtoken;
+
+        }
+
+        public async Task<JwtTokenDTO?> GenerateRefreshTokenWithJwtToken(string refreshToken)
+        {
+            ApplicationUser? user = await _userManager.Users.FirstOrDefaultAsync(u => u.RefreshToken == refreshToken);
+            if (user != null && user?.RefreshTokenEndDate > DateTime.UtcNow)
+            {
+                return await CreateJwtToken(user);
             }
-            var claims = new[]
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                
+            else
+                return null;
 
-            }.Union(roleClaims);
 
-            JwtSecurityToken jwtSecurityToken = new JwtSecurityToken
-          (
-              audience: _configuration["Jwt:Audience"],
-              issuer: _configuration["Jwt:Issuer"],
-              claims: claims,
-              
-              signingCredentials: signingCredentials
-          );
-
-            JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
-            jwtTokenDTO.AccessToken = jwtSecurityTokenHandler.WriteToken(jwtSecurityToken);
-            return jwtTokenDTO;
         }
     }
 }

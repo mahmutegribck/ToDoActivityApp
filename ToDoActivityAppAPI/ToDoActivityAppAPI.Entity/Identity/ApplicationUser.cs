@@ -18,8 +18,11 @@ namespace ToDoActivityAppAPI.Entity.Identity
 
         public DateTime? Birthdate { get; set; }
 
-        public ICollection<Activity> Activities { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenEndDate { get; set; }
 
+
+        public ICollection<Activity> Activities { get; set; }
 
     }
 }
