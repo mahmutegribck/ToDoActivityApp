@@ -108,5 +108,10 @@ namespace ToDoActivityAppAPI.Business.Activities
         {
             return await _activityRepository.UpdateActivity(activityId, IdentityUserId, _mapper.Map<Activity>(updateActivityDTO));
         }
+
+        public async Task<List<string>> GetUserActivityTitles(string identityUserId)
+        {
+            return await _activityRepository.GetUserActivityTitles(identityUserId);
+        }
     }
 }

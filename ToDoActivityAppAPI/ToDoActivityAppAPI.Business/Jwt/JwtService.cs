@@ -38,11 +38,10 @@ namespace ToDoActivityAppAPI.Business.Jwt
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                        new Claim(ClaimTypes.Name,user.Name),
-                        //new Claim(ClaimTypes.Role,user.)
+                    new Claim(ClaimTypes.NameIdentifier, user.Id)
                 }),
-                Audience= _configuration["Jwt:Audience"],
-                Issuer= _configuration["Jwt:Issuer"],
+                Audience = _configuration["Jwt:Audience"],
+                Issuer = _configuration["Jwt:Issuer"],
                 Expires = jwttoken.AccessTokenTime,
                 SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
             };

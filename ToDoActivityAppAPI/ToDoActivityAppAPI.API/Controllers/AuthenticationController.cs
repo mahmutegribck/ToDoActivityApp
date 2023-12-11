@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ToDoActivityAppAPI.Business.Auth;
 using ToDoActivityAppAPI.Business.Auth.DTOs;
+using ToDoActivityAppAPI.Business.Auth.ResponseModel;
+using ToDoActivityAppAPI.Business.Jwt.DTOs;
 using ToDoActivityAppAPI.Entity;
 
 namespace ToDoActivityAppAPI.API.Controllers
@@ -24,7 +26,7 @@ namespace ToDoActivityAppAPI.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _authService.RegisterUserAsync(model);
+                RegisterResponse result = await _authService.RegisterUserAsync(model);
                 if (result.IsSuccess)
                 {
                     return Ok(result);
@@ -39,7 +41,7 @@ namespace ToDoActivityAppAPI.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _authService.LoginUserAsync(model);
+                LoginResponse result = await _authService.LoginUserAsync(model);
 
                 if (result.IsSuccess)
                 {
@@ -55,7 +57,7 @@ namespace ToDoActivityAppAPI.API.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> LoginWithRefreshToken([FromBody] string refreshToken)
         {
-            var tokens = await _authService.LoginWithRefreshToken(refreshToken);
+            JwtTokenDTO? tokens = await _authService.LoginWithRefreshToken(refreshToken);
             if (tokens != null)
             {
                 return Ok(tokens);
@@ -70,7 +72,7 @@ namespace ToDoActivityAppAPI.API.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _authService.ResetPasswordAsync(model);
+                LoginResponse result = await _authService.ResetPasswordAsync(model);
 
                 if (result.IsSuccess)
                     return Ok(result);
