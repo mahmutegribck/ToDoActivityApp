@@ -121,6 +121,7 @@ builder.Services.AddAuthentication(options =>
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     //RequireExpirationTime = true,
+                    ClockSkew = TimeSpan.Zero,
 
                     ValidAudience = builder.Configuration["Jwt:Audience"],
                     ValidIssuer = builder.Configuration["Jwt:Issuer"],
