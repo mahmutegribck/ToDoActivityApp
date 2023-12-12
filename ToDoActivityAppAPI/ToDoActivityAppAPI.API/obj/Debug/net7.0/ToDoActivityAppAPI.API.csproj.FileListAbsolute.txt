@@ -8,8 +8,6 @@ C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.AP
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Azure.Core.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Azure.Identity.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Humanizer.dll
-C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
-C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.Data.SqlClient.dll
@@ -19,9 +17,6 @@ C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.AP
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
-C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.Extensions.Identity.Core.dll
-C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.Extensions.Identity.Stores.dll
-C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.Identity.Client.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.Identity.Client.Extensions.Msal.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\Microsoft.IdentityModel.Abstractions.dll
@@ -89,3 +84,4 @@ C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.AP
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\ToDoActivityAppAPI.Business.pdb
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\obj\Debug\net7.0\ToDoActivityAppAPI.API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\bin\Debug\net7.0\ToDoActivityAppAPI.API.staticwebassets.runtime.json
+C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.API\obj\Debug\net7.0\ToDoActivityAppAPI.API.sourcelink.json

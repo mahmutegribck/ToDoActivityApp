@@ -34,28 +34,35 @@ namespace ToDoActivityAppAPI.Business.Jwt
             SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"] ?? string.Empty));
 
             jwttoken.AccessTokenTime = DateTime.UtcNow.AddHours(1);
+
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+            };
+
+            var userRoles = await _userManager.GetRolesAsync(user);
+            foreach (var role in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
             var tokendesc = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                        new Claim(ClaimTypes.Name,user.Name),
-                        //new Claim(ClaimTypes.Role,user.)
-                }),
-                Audience= _configuration["Jwt:Audience"],
-                Issuer= _configuration["Jwt:Issuer"],
+                Subject = new ClaimsIdentity(claims),
+                Audience = _configuration["Jwt:Audience"],
+                Issuer = _configuration["Jwt:Issuer"],
                 Expires = jwttoken.AccessTokenTime,
                 SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
             };
+
             var token = tokenhandler.CreateToken(tokendesc);
             var finaltoken = tokenhandler.WriteToken(token);
 
 
             return new JwtTokenDTO() { AccessToken = finaltoken, AccessTokenTime = jwttoken.AccessTokenTime, RefreshToken = await GenerateRefreshToken(user, jwttoken.AccessTokenTime) };
-
-
-
         }
-
+            
+         
         public async Task<string> GenerateRefreshToken(ApplicationUser user, DateTime accessTokenTime)
         {
             var randomnumber = new byte[32];
@@ -69,8 +76,8 @@ namespace ToDoActivityAppAPI.Business.Jwt
             await _userManager.UpdateAsync(user);
 
             return refreshtoken;
-
         }
+
 
         public async Task<JwtTokenDTO?> GenerateRefreshTokenWithJwtToken(string refreshToken)
         {
@@ -81,8 +88,6 @@ namespace ToDoActivityAppAPI.Business.Jwt
             }
             else
                 return null;
-
-
         }
     }
 }

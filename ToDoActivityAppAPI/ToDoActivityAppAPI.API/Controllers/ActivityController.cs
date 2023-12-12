@@ -10,10 +10,10 @@ using ToDoActivityAppAPI.Entity.Identity;
 
 namespace ToDoActivityAppAPI.API.Controllers
 {
-
-    [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Route("/")]
+    
+    
     public class ActivityController : ControllerBase
     {
         private readonly IActivityService _activityService;
@@ -227,7 +227,7 @@ namespace ToDoActivityAppAPI.API.Controllers
             }
             return Unauthorized();
         }
-        
+
 
         [HttpGet("[action]/{minDay}/{maxDay}")]
         public async Task<IActionResult> GetUserActivitiesByNumberOfDays(int minDay, int maxDay)
@@ -258,6 +258,24 @@ namespace ToDoActivityAppAPI.API.Controllers
                 if (userActivitiesByButget.Count != 0 && minBudget >= 0 && maxBudget >= 0 && maxBudget >= minBudget)
                 {
                     return Ok(userActivitiesByButget);
+                }
+                return NotFound();
+            }
+            return Unauthorized();
+        }
+
+        [HttpGet("[action]")]
+        public async Task<IActionResult> GetUserActivityTitles()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            if (currentUser != null)
+            {
+                List<string> userActivityTitles = await _activityService.GetUserActivityTitles(currentUser.Id);
+
+                if (userActivityTitles.Count > 0)
+                {
+                    return Ok(userActivityTitles);
                 }
                 return NotFound();
             }

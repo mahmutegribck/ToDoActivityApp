@@ -8,7 +8,7 @@ using ToDoActivityAppAPI.Entity.Identity;
 
 namespace ToDoActivityAppAPI.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/")]
     [ApiController]
     public class UsersController : ControllerBase
     {
@@ -27,7 +27,7 @@ namespace ToDoActivityAppAPI.API.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        [Authorize(Roles = "Admin")]
+        
         public async Task<IActionResult> GetAllUsers()
         {
             var users = await _userService.GetAllUsers();

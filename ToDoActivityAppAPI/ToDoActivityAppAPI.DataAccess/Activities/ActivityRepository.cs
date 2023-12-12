@@ -225,5 +225,12 @@ namespace ToDoActivityAppAPI.DataAccess.Activities
             return activies;
         }
 
+        public async Task<List<string>> GetUserActivityTitles(string identityUserId)
+        {
+            List<string> userActivitiesTitles = await _context.Activities.Where(a => a.ApplicationUserId == identityUserId).Select(a => a.Title).ToListAsync();
+
+            return userActivitiesTitles;
+
+        }
     }
 }
