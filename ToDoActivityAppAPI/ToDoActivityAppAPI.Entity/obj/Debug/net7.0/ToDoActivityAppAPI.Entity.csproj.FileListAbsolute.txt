@@ -10,3 +10,4 @@ C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.En
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.Entity\obj\Debug\net7.0\refint\ToDoActivityAppAPI.Entity.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.Entity\obj\Debug\net7.0\ToDoActivityAppAPI.Entity.pdb
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.Entity\obj\Debug\net7.0\ref\ToDoActivityAppAPI.Entity.dll
+C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.Entity\obj\Debug\net7.0\ToDoActivityAppAPI.Entity.sourcelink.json

@@ -15,3 +15,4 @@ C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.Bu
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.Business\obj\Debug\net7.0\refint\ToDoActivityAppAPI.Business.dll
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.Business\obj\Debug\net7.0\ToDoActivityAppAPI.Business.pdb
 C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.Business\obj\Debug\net7.0\ref\ToDoActivityAppAPI.Business.dll
+C:\Users\Mahmut\Desktop\ToDoActivityApp\ToDoActivityAppAPI\ToDoActivityAppAPI.Business\obj\Debug\net7.0\ToDoActivityAppAPI.Business.sourcelink.json

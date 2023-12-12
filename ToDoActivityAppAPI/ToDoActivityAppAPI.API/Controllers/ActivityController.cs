@@ -10,10 +10,10 @@ using ToDoActivityAppAPI.Entity.Identity;
 
 namespace ToDoActivityAppAPI.API.Controllers
 {
-
-    [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Route("/")]
+    
+    
     public class ActivityController : ControllerBase
     {
         private readonly IActivityService _activityService;

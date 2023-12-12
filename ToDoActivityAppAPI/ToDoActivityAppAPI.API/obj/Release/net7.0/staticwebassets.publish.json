@@ -1,0 +1,19 @@
+{
+  "Version": 1,
+  "Hash": "ihx8kdunwHdFdzDR0QcHqmzbEz5KGqpwPP9CiDoQZD0=",
+  "Source": "ToDoActivityAppAPI.API",
+  "BasePath": "_content/ToDoActivityAppAPI.API",
+  "Mode": "Default",
+  "ManifestType": "Publish",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "ToDoActivityAppAPI.API\\wwwroot",
+      "Source": "ToDoActivityAppAPI.API",
+      "ContentRoot": "C:\\Users\\Mahmut\\Desktop\\ToDoActivityApp\\ToDoActivityAppAPI\\ToDoActivityAppAPI.API\\wwwroot\\",
+      "BasePath": "_content/ToDoActivityAppAPI.API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": []
+}
