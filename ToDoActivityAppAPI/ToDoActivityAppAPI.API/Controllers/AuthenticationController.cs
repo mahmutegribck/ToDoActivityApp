@@ -8,7 +8,7 @@ using ToDoActivityAppAPI.Entity;
 
 namespace ToDoActivityAppAPI.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     [AllowAnonymous]
     public class AuthenticationController : ControllerBase
@@ -20,6 +20,7 @@ namespace ToDoActivityAppAPI.API.Controllers
             _authService = authService;
 
         }
+
 
         [HttpPost("[action]")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterDto model)
@@ -36,6 +37,7 @@ namespace ToDoActivityAppAPI.API.Controllers
             return BadRequest(ErrorMsg.InvalidProperties);
         }
 
+
         [HttpPost("[action]")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginDto model)
         {
@@ -51,8 +53,8 @@ namespace ToDoActivityAppAPI.API.Controllers
                 return BadRequest(result);
             }
             return BadRequest(ErrorMsg.InvalidProperties);
-
         }
+
 
         [HttpPost("[action]")]
         public async Task<IActionResult> LoginWithRefreshToken([FromBody] string refreshToken)
@@ -63,8 +65,8 @@ namespace ToDoActivityAppAPI.API.Controllers
                 return Ok(tokens);
             }
            return Unauthorized();
-
         }
+
 
         [HttpPost("[action]")]
         [Authorize(Roles = "Admin,User")]
@@ -79,7 +81,6 @@ namespace ToDoActivityAppAPI.API.Controllers
 
                 return BadRequest(result);
             }
-
             return BadRequest(ErrorMsg.InvalidProperties);
         }
     }
