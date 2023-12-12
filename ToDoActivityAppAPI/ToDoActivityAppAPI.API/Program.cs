@@ -106,7 +106,7 @@ builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    //options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
 })
 
 
@@ -120,7 +120,7 @@ builder.Services.AddAuthentication(options =>
                     ValidateAudience = true,
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
-                    RequireExpirationTime = true,
+                    //RequireExpirationTime = true,
                     ClockSkew = TimeSpan.Zero,
 
                     ValidAudience = builder.Configuration["Jwt:Audience"],
@@ -139,7 +139,7 @@ builder.Services.AddDbContext<ToDoActivityAppAPIDbContext>(options => options.Us
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI(c =>
