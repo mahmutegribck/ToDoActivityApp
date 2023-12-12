@@ -11,9 +11,9 @@ using ToDoActivityAppAPI.Entity.Identity;
 namespace ToDoActivityAppAPI.API.Controllers
 {
     [ApiController]
-    [Route("/")]
-    
-    
+    [Route("api/[controller]")]
+
+
     public class ActivityController : ControllerBase
     {
         private readonly IActivityService _activityService;
