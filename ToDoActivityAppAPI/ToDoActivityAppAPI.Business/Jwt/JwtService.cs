@@ -31,13 +31,13 @@ namespace ToDoActivityAppAPI.Business.Jwt
         {
             var jwttoken = new JwtTokenDTO();
             var tokenhandler = new JwtSecurityTokenHandler();
-            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Key"] ?? string.Empty));
+            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_configuration["JWT:Key"] ?? string.Empty));
 
-            jwttoken.AccessTokenTime = DateTime.UtcNow.AddHours(1);
+            jwttoken.AccessTokenTime = DateTime.UtcNow.AddMinutes(30);
 
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new(ClaimTypes.NameIdentifier, user.Id),
             };
 
             var userRoles = await _userManager.GetRolesAsync(user);
@@ -72,7 +72,7 @@ namespace ToDoActivityAppAPI.Business.Jwt
             string refreshtoken = Convert.ToBase64String(randomnumber);
 
             user.RefreshToken = refreshtoken;
-            user.RefreshTokenEndDate = accessTokenTime.AddHours(1);
+            user.RefreshTokenEndDate = accessTokenTime.AddMinutes(20);
             await _userManager.UpdateAsync(user);
 
             return refreshtoken;
